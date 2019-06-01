@@ -65,4 +65,25 @@ public class ProdutoDAO {
         } catch (SQLException e) {
         }
     }
+    
+    public ProdutoBean selecionaPorId (int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            ProdutoBean produto = new ProdutoBean();
+            while (rs.next()) {
+                produto.setCodigo(rs.getInt("codigo"));
+                produto.setNome(rs.getString("nome"));
+                produto.setImagem(rs.getString("imagem"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQuant_estoque(rs.getInt("quant_estoque"));
+            }
+            pstm.close();
+            rs.close();
+            return produto;
+        } catch (SQLException e) {
+        }
+        return null;
+    }
 }

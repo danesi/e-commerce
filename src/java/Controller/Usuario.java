@@ -71,6 +71,12 @@ public class Usuario extends HttpServlet {
                 rd.forward(request, response);
             }
         }
+        
+        if (acao.equalsIgnoreCase("sair")) {
+            session.invalidate();
+            rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

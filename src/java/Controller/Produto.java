@@ -50,50 +50,44 @@ public class Produto extends HttpServlet {
 
         ProdutoDAO dao = new ProdutoDAO();
 
-//        if (acao.equalsIgnoreCase("addCarrinho")) {
-//            if (session.getAttribute("usuario") == null) {
-//                rd = request.getRequestDispatcher("login.jsp");
-//                rd.forward(request, response);
-//            } else {
-//                int quantidade = Integer.parseInt(request.getParameter("qaunt"));
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                if (dao.verificaQuant(id, quantidade)) {
-//                    ProdutoBean produto = dao.selecionaPorId(id);
-//                    List<ProdutoBean> carrinho = new ArrayList<>();
-//                    if (session.getAttribute("carrinho") != null) {
-//                        List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
-//                        for (ProdutoBean p : produtos) {
-//                            carrinho.add(p);
-//                        }
-//                    }
-//                    produto.setQuant(quantidade);
-//                    carrinho.add(produto);
-//                    session.setAttribute("carrinho", carrinho);
-//                    rd = request.getRequestDispatcher("index.jsp");
-//                    rd.forward(request, response);
-//                } else {
-//                    ProdutoBean produto = dao.selecionaPorId(id);
-//                    session.setAttribute("p", produto);
-//                    rd = request.getRequestDispatcher("verProduto.jsp");
-//                    rd.forward(request, response);
-//                }
-//            }
-//        }
-//
-//        if (acao.equalsIgnoreCase("verProduto")) {
-//            int id = Integer.parseInt(request.getParameter("id"));
-//            ProdutoBean produto = dao.selecionaPorId(id);
-//            session.setAttribute("produto", produto);
-//            rd = request.getRequestDispatcher("verProduto.jsp");
-//            rd.forward(request, response);
-//        }
+        if (acao.equalsIgnoreCase("addCarrinho")) {
+            if (session.getAttribute("usuario") == null) {
+                rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            } else {
+                int quantidade = Integer.parseInt(request.getParameter("quant"));
+                int id = Integer.parseInt(request.getParameter("id"));
+                ProdutoBean produto = dao.selecionaPorId(id);
+                List<ProdutoBean> carrinho = new ArrayList<>();
+                if (session.getAttribute("carrinho") != null) {
+                    List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
+                    for (ProdutoBean p : produtos) {
+                        carrinho.add(p);
+                    }
+                }
+                produto.setQuant(quantidade);
+                carrinho.add(produto);
+                session.setAttribute("carrinho", carrinho);
+                rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+
+            }
+        }
+
+        if (acao.equalsIgnoreCase("verProduto")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProdutoBean produto = dao.selecionaPorId(id);
+            session.setAttribute("produto", produto);
+            rd = request.getRequestDispatcher("produtoVerMais.jsp");
+            rd.forward(request, response);
+        }
 
         if (acao.equalsIgnoreCase("removeCarrinho")) {
             List<ProdutoBean> carrinho = new ArrayList<>();
             List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
             int id = Integer.parseInt(request.getParameter("id"));
             for (ProdutoBean p : produtos) {
-                if (p.getCodigo()!= id) {
+                if (p.getCodigo() != id) {
                     carrinho.add(p);
                 }
             }

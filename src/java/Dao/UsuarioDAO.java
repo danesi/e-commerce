@@ -63,6 +63,7 @@ public class UsuarioDAO {
                 user.setCidade(rs.getString("cidade"));
                 user.setEmail(rs.getString("email"));
                 user.setSenha(rs.getString("senha"));
+                user.setAdm(rs.getBoolean("adm"));
             }
             pstm.close();
             rs.close();
