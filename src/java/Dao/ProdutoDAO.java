@@ -1,0 +1,68 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Dao;
+
+import Model.ProdutoBean;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Anesi
+ */
+public class ProdutoDAO {
+    private Connection conexao;
+
+    public ProdutoDAO() {
+        try {
+            this.conexao = Conexao.getConnection();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public List<ProdutoBean> selecionaTodos() {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos");
+            ResultSet rs = pstm.executeQuery();
+            List<ProdutoBean> produtos = new ArrayList<>();
+            while (rs.next()) {
+                ProdutoBean produto = new ProdutoBean();
+                produto.setCodigo(rs.getInt("codigo"));
+                produto.setNome(rs.getString("nome"));
+                produto.setImagem(rs.getString("imagem"));
+                produto.setPreco(rs.getDouble("preco"));
+                produto.setQuant_estoque(rs.getInt("quant_estoque"));
+                
+                produtos.add(produto);
+            }
+            pstm.close();
+            rs.close();
+            return produtos;
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
+    
+    public void inserir (ProdutoBean produto) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("insert into produtos values (default, ?, ?, ?, ?)");
+            pstm.setString(1, produto.getNome());
+            pstm.setString(2, produto.getImagem());
+            pstm.setDouble(3, produto.getPreco());
+            pstm.setInt(4, produto.getQuant_estoque());
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+    }
+}
