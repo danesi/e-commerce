@@ -86,4 +86,15 @@ public class ProdutoDAO {
         }
         return null;
     }
+    
+    public void removerProduto (int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("delete from produtos where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+    }
 }

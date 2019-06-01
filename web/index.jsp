@@ -23,7 +23,6 @@
                     ProdutoDAO dao = new ProdutoDAO();
                     List<ProdutoBean> produtos = dao.selecionaTodos();
                     for (ProdutoBean produto : produtos) {%>
-
                 <div class="col s2">
                     <div class="card">
                         <div class="card-image">
@@ -36,7 +35,6 @@
                         </div>
                     </div>
                 </div>
-
                 <%
                     }
                 %>

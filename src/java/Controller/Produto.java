@@ -140,6 +140,22 @@ public class Produto extends HttpServlet {
 
             dao.inserir(produto);
         }
+        
+        if (acao.equalsIgnoreCase("verProdutos")) {
+            List<ProdutoBean> produtos = dao.selecionaTodos();
+            session.setAttribute("produtos", produtos);
+            rd = request.getRequestDispatcher("produtoView.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (acao.equalsIgnoreCase("deletarProduto")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            dao.removerProduto(id);
+            List<ProdutoBean> produtos = dao.selecionaTodos();
+            session.setAttribute("produtos", produtos);
+            rd = request.getRequestDispatcher("produtoView.jsp");
+            rd.forward(request, response);
+        }
 
     }
 

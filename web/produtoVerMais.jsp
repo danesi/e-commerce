@@ -44,7 +44,19 @@
                                         </div>
                                         <div class="row center">
                                             <a class="waves-effect waves-light btn grey darken-3">Cancelar</a>
+                                            <%
+                                                if (session.getAttribute("usuario") != null) {
+                                            %>
                                             <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Adicionar ao carrinho</button>
+                                            <%
+                                            } else {
+                                            %>
+                                            <a href="login.jsp" class="waves-effect waves-light btn orange darken-3">Logar</a>
+                                            <h6 class="black-text">* Você precisa estar logado para continuar com a compra</h6>
+                                            <%
+                                                }
+                                            %>
+
                                         </div>
                                     </form>
                                 </div>
