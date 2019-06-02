@@ -21,6 +21,7 @@
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Área administrativa</span>
                             <a href="Produto?acao=verProdutos" class="waves-effect waves-light btn orange darken-3">Editar produtos</a>
+                            <a href="produtoAdd.jsp" class="waves-effect waves-light btn orange darken-3">Cadastrar produtos</a>
                         </div>
                     </div>
                 </div>

@@ -41,8 +41,12 @@
                                         </div>
                                     </div>
                                     <div class="row center">
-                                        <a class="waves-effect waves-light btn grey darken-3" href="usuarioAdd.jsp">Criar conta</a>
+                                        <a class="waves-effect waves-light btn grey darken-3" href="index.jsp">Entrar sem logar</a>
                                         <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Entrar</button>
+                                        <div class="row center" >
+                                            <br>
+                                            <a href="usuarioAdd.jsp" class="orange-text">Cadastre-se</a>
+                                        </div>
                                     </div>
                                     <%
                                         if (request.getParameter("msg") != null) { %>

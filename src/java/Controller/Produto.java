@@ -139,15 +139,69 @@ public class Produto extends HttpServlet {
             }
 
             dao.inserir(produto);
+            rd = request.getRequestDispatcher("produtoAdd.jsp");
+            rd.forward(request, response);
         }
-        
+
+        if (acao.equalsIgnoreCase("editar")) {
+            if (!ServletFileUpload.isMultipartContent(request)) {
+                rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+            }
+
+            ProdutoBean produto = new ProdutoBean();
+            
+            int id = Integer.parseInt(request.getParameter("id"));
+            produto.setCodigo(id);
+
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+
+            ServletContext servletContext = this.getServletConfig().getServletContext();
+            File repository = (File) servletContext.getAttribute("javax.servel.context.tempdir");
+            factory.setRepository(repository);
+
+            ServletFileUpload upload = new ServletFileUpload(factory);
+
+            List<FileItem> items = upload.parseRequest(request);
+
+            Iterator<FileItem> iter = items.iterator();
+
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
+
+                if (item.isFormField()) {
+                    produto = processFormField(item, produto);
+                    if (produto.getNome() == null) {
+                        request.setAttribute("error", "Ocorreu um erro durante o processamento dos valores. Tente novamente.");
+                        rd = request.getRequestDispatcher("/products?action=index");
+                        rd.forward(request, response);
+                    }
+                } else {
+                    System.out.println("AAAAA");
+                    produto = processUploadedFile(item, produto);
+
+                    if (produto.getImagem() == null) {
+                        request.setAttribute("error", "Falha ao salvar imagem. Tente novamente.");
+                        rd = request.getRequestDispatcher("/products?action=index");
+                        rd.forward(request, response);
+                    }
+                }
+            }
+
+            dao.editar(produto);
+            List<ProdutoBean> p = dao.selecionaTodos();
+            session.setAttribute("produtos", p);
+            rd = request.getRequestDispatcher("produtoView.jsp");
+            rd.forward(request, response);
+        }
+
         if (acao.equalsIgnoreCase("verProdutos")) {
             List<ProdutoBean> produtos = dao.selecionaTodos();
             session.setAttribute("produtos", produtos);
             rd = request.getRequestDispatcher("produtoView.jsp");
             rd.forward(request, response);
         }
-        
+
         if (acao.equalsIgnoreCase("deletarProduto")) {
             int id = Integer.parseInt(request.getParameter("id"));
             dao.removerProduto(id);
@@ -157,12 +211,20 @@ public class Produto extends HttpServlet {
             rd.forward(request, response);
         }
 
+        if (acao.equalsIgnoreCase("editarProduto")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProdutoBean produto = dao.selecionaPorId(id);
+            session.setAttribute("produtoEditar", produto);
+            rd = request.getRequestDispatcher("produtoEdit.jsp");
+            rd.forward(request, response);
+        }
+
     }
 
     private ProdutoBean processFormField(FileItem item, ProdutoBean product) {
         String fieldName = item.getFieldName();
         String value = item.getString();
-
+        System.out.println("CODIGO: ");
         switch (fieldName) {
             case "nome":
                 product.setNome(value);
@@ -185,9 +247,6 @@ public class Produto extends HttpServlet {
             File uploadDir = new File(getServletContext().getRealPath("/") + "/Imagens");
             File file = File.createTempFile("img", ".png", uploadDir);
             item.write(file);
-
-            System.out.println("FILENAME: " + file.getName());
-
             product.setImagem(file.getName());
 
         } catch (Exception ex) {

@@ -15,6 +15,11 @@
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
         <main>
+            <%
+                if (session.getAttribute("usuario") == null) {
+                    response.sendRedirect("index.jsp");
+                }
+            %>
             <div class="row">
                 <div class="col s10 offset-l1">
                     <div class="card white">
@@ -44,6 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="row center">
+                                    <a class="waves-effect waves-light btn grey darken-3" href="administrativa.jsp">VOltar</a>
                                     <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Cadastrar</button>
                                 </div>
                             </form>

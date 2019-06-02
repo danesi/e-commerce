@@ -52,7 +52,7 @@
                                             } else {
                                             %>
                                             <a href="login.jsp" class="waves-effect waves-light btn orange darken-3">Logar</a>
-                                            <h6 class="black-text">* Você precisa estar logado para continuar com a compra</h6>
+                                            <h6 class="red-text">* Você precisa estar logado para continuar com a compra</h6>
                                             <%
                                                 }
                                             %>

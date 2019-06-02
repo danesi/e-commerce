@@ -65,7 +65,7 @@
                             <div class="row center">
                                 <h5 class="black-text">Preço total a pagar: <%= precoFinal%> R$</h5>
                                 <br>
-                                <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Voltar</a>
+                                <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Continuar comprando</a>
                                 <a href="#" class="waves-effect waves-light btn orange darken-3">Concluir compra</a>
                             </div>
                         </div>
