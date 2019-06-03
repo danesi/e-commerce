@@ -25,7 +25,7 @@
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Editar Produto <%= produto.getNome()%></span>
                             <div class="row">
-                                <form action="Produto?acao=editar&id=<%= produto.getCodigo() %>" method="post" enctype="multipart/form-data">
+                                <form action="Produto?acao=editar&id=<%= produto.getCodigo()%>" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="input-field col s5 offset-l1">
                                             <input id="codigo" type="text" name="codigo" value="<%= produto.getCodigo()%>" disabled>
@@ -50,9 +50,9 @@
                                         <div class="col s5 offset-l1">
                                             <div class="file-field input-field">
                                                 <span class="grey-text">Imagem</span>
-                                                <input type="file" name="imagem">
+                                                <input type="file" id="file" name="file">
                                                 <div class="file-path-wrapper">
-                                                    <input class="file-path validate black-text" id="imagem" name="imagem" type="text" value="<%= produto.getNome()%>.png">
+                                                    <input class="file-path validate black-text" id="imagem" name="imagem" type="text">
                                                 </div>
                                             </div>  
                                         </div>
@@ -71,3 +71,6 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
+<script>
+    
+</script>

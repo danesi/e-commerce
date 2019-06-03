@@ -150,7 +150,7 @@ public class Produto extends HttpServlet {
             }
 
             ProdutoBean produto = new ProdutoBean();
-            
+
             int id = Integer.parseInt(request.getParameter("id"));
             produto.setCodigo(id);
 
@@ -177,12 +177,15 @@ public class Produto extends HttpServlet {
                         rd.forward(request, response);
                     }
                 } else {
-                    System.out.println("AAAAA");
-                    produto = processUploadedFile(item, produto);
+                    if (item.getSize() > 0) {
+                        produto = processUploadedFile(item, produto);
+                    }
 
                     if (produto.getImagem() == null) {
-                        request.setAttribute("error", "Falha ao salvar imagem. Tente novamente.");
-                        rd = request.getRequestDispatcher("/products?action=index");
+                        dao.editarSemImagem(produto);
+                        List<ProdutoBean> p = dao.selecionaTodos();
+                        session.setAttribute("produtos", p);
+                        rd = request.getRequestDispatcher("produtoView.jsp");
                         rd.forward(request, response);
                     }
                 }
@@ -224,7 +227,6 @@ public class Produto extends HttpServlet {
     private ProdutoBean processFormField(FileItem item, ProdutoBean product) {
         String fieldName = item.getFieldName();
         String value = item.getString();
-        System.out.println("CODIGO: ");
         switch (fieldName) {
             case "nome":
                 product.setNome(value);

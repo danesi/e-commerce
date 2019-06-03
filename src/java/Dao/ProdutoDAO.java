@@ -113,4 +113,19 @@ public class ProdutoDAO {
         } catch (SQLException e) {
         }
     }
+    
+    public void editarSemImagem(ProdutoBean produto){
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("update produtos set nome = ?, preco = ?, quant_estoque = ? where codigo = ?");
+            pstm.setString(1, produto.getNome());
+            pstm.setDouble(2, produto.getPreco());
+            pstm.setInt(3, produto.getQuant_estoque());
+            pstm.setInt(4, produto.getCodigo());
+            ResultSet rs = pstm.executeQuery();
+            System.out.println("veio aqui");
+            pstm.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+    }
 }
