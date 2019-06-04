@@ -115,7 +115,7 @@ public class UsuarioDAO {
     public boolean verificaSenha(String senha, int id) {
         boolean retorno = false;
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select senha from usuarios where id = ?");
+            PreparedStatement pstm = conexao.prepareStatement("select senha from usuarios where codigo = ?");
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
