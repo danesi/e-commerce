@@ -58,6 +58,60 @@ public class Usuario extends HttpServlet {
             rd.forward(request, response);
         }
 
+        if (acao.equalsIgnoreCase("editar")) {
+            System.out.println(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
+            UsuarioBean usuario = new UsuarioBean();
+            System.out.println("AAAAA"+request.getParameter("senhaNova"));
+            if (request.getParameter("senhaNova") != null) {
+                if (request.getParameter("senha").equals(request.getParameter("senhaNova"))) {
+                    if (dao.verificaSenha(request.getParameter("senha"), id)) {
+                        usuario.setCodigo(id);
+                        usuario.setNome(request.getParameter("nome"));
+                        usuario.setNascimento(request.getParameter("nascimento"));
+                        usuario.setTelefone(request.getParameter("telefone"));
+                        usuario.setCpf(request.getParameter("cpf"));
+                        usuario.setEstado(request.getParameter("estado"));
+                        usuario.setCidade(request.getParameter("cidade"));
+                        usuario.setEmail(request.getParameter("email"));
+                        usuario.setSenha(request.getParameter("senha"));
+                        dao.editar(usuario);
+                        session.setAttribute("usuario", usuario);
+                        rd = request.getRequestDispatcher("usuarioView.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        session.setAttribute("erro_atualizar_user", "A senha atual não corresposde!");
+                        rd = request.getRequestDispatcher("usuarioEdit.jsp");
+                        rd.forward(request, response);
+                    }
+                } else {
+                    session.setAttribute("erro_atualizar_user", "As senhas não correspondem");
+                    rd = request.getRequestDispatcher("usuarioEdit.jsp");
+                    rd.forward(request, response);
+                }
+            } else {
+                if (dao.verificaSenha(request.getParameter("senha"), id)) {
+                    usuario.setCodigo(id);
+                    usuario.setNome(request.getParameter("nome"));
+                    usuario.setNascimento(request.getParameter("nascimento"));
+                    usuario.setTelefone(request.getParameter("telefone"));
+                    usuario.setCpf(request.getParameter("cpf"));
+                    usuario.setEstado(request.getParameter("estado"));
+                    usuario.setCidade(request.getParameter("cidade"));
+                    usuario.setEmail(request.getParameter("email"));
+                    dao.editarSemSenha(usuario);
+                    session.setAttribute("usuario", usuario);
+                    rd = request.getRequestDispatcher("usuarioView.jsp");
+                    rd.forward(request, response);
+                } else {
+                    session.setAttribute("erro_atualizar_user", "A senha atual não corresposde!");
+                    rd = request.getRequestDispatcher("usuarioEdit.jsp");
+                    rd.forward(request, response);
+                }
+            }
+
+        }
+
         if (acao.equalsIgnoreCase("login")) {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
@@ -71,11 +125,11 @@ public class Usuario extends HttpServlet {
                 rd.forward(request, response);
             }
         }
-        
+
         if (acao.equalsIgnoreCase("sair")) {
             session.invalidate();
             rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
+            rd.forward(request, response);
         }
     }
 

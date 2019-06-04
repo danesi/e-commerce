@@ -45,8 +45,8 @@ public class UsuarioDAO {
 
         }
     }
-    
-    public UsuarioBean login(UsuarioBean usuario){
+
+    public UsuarioBean login(UsuarioBean usuario) {
         try {
             PreparedStatement pstm = conexao.prepareStatement("select * from usuarios where email = ? and senha = ?");
             pstm.setString(1, usuario.getEmail());
@@ -72,5 +72,59 @@ public class UsuarioDAO {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public void editar(UsuarioBean usuario) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, cidade = ?, estado = ?, email = ?, senha = ? where codigo = ?");
+            pstm.setString(1, usuario.getNome());
+            pstm.setString(2, usuario.getNascimento());
+            pstm.setString(3, usuario.getTelefone());
+            pstm.setString(4, usuario.getCpf());
+            pstm.setString(5, usuario.getCidade());
+            pstm.setString(6, usuario.getEstado());
+            pstm.setString(7, usuario.getEmail());
+            pstm.setString(8, usuario.getSenha());
+            pstm.setInt(9, usuario.getCodigo());
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+    }
+    
+    public void editarSemSenha(UsuarioBean usuario) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, cidade = ?, estado = ?, email = ? where codigo = ?");
+            pstm.setString(1, usuario.getNome());
+            pstm.setString(2, usuario.getNascimento());
+            pstm.setString(3, usuario.getTelefone());
+            pstm.setString(4, usuario.getCpf());
+            pstm.setString(5, usuario.getCidade());
+            pstm.setString(6, usuario.getEstado());
+            pstm.setString(7, usuario.getEmail());
+            pstm.setInt(8, usuario.getCodigo());
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
+        } catch (Exception e) {
+            
+        }
+    }
+
+    public boolean verificaSenha(String senha, int id) {
+        boolean retorno = false;
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select senha from usuarios where id = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("senha").equals(senha)) {
+                    retorno = true;
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return retorno;
     }
 }
