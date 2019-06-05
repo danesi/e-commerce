@@ -8,6 +8,14 @@
         <servlet-name>Produto</servlet-name>
         <servlet-class>Controller.Produto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Venda</servlet-name>
+        <servlet-class>Controller.Venda</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Endereco</servlet-name>
+        <servlet-class>Controller.Endereco</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Usuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>Produto</servlet-name>
         <url-pattern>/Produto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Venda</servlet-name>
+        <url-pattern>/Venda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Endereco</servlet-name>
+        <url-pattern>/Endereco</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

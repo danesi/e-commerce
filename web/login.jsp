@@ -14,6 +14,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <%
                 if (session.getAttribute("usuario") != null) {
@@ -68,4 +69,4 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
-<jsp:include page="Bases/erro.jsp" />
+

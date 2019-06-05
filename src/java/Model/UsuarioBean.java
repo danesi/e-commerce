@@ -15,8 +15,6 @@ public class UsuarioBean {
     private String nascimento;
     private String telefone;
     private String cpf;
-    private String estado;
-    private String cidade;
     private String email;
     private String senha;
     private boolean adm;
@@ -59,22 +57,6 @@ public class UsuarioBean {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     public String getEmail() {

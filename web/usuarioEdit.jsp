@@ -26,6 +26,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <%
                 if (session.getAttribute("usuario") != null) {
@@ -62,16 +63,6 @@
                                         <div class="input-field col s5">
                                             <input id="cpf" name="cpf" type="text" required value="<%= usuario.getCpf()%>">
                                             <label for="cpf">CPF</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s5 offset-l1">
-                                            <input id="estado" name="estado" type="text" required value="<%= usuario.getEstado()%>">
-                                            <label for="estado">Estado</label>
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input id="cidade" name="cidade" type="text" required value="<%= usuario.getCidade()%>">
-                                            <label for="cidade">Cidade</label>
                                         </div>
                                     </div>
                                     <div class="row">

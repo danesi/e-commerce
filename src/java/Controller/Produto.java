@@ -79,7 +79,7 @@ public class Produto extends HttpServlet {
             ProdutoBean produto = dao.selecionaPorId(id);
             session.setAttribute("produto", produto);
             if (session.getAttribute("usuario") == null) {
-                session.setAttribute("erro", "Você presisa estar logado para adicionar ao carrinho");
+                session.setAttribute("msg", "Você presisa estar logado para adicionar ao carrinho");
             }
             rd = request.getRequestDispatcher("produtoVerMais.jsp");
             rd.forward(request, response);
@@ -142,6 +142,7 @@ public class Produto extends HttpServlet {
             }
 
             dao.inserir(produto);
+            session.setAttribute("msg", "Produto cadastrado com sucesso");
             rd = request.getRequestDispatcher("produtoAdd.jsp");
             rd.forward(request, response);
         }

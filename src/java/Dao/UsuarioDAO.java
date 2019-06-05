@@ -29,15 +29,13 @@ public class UsuarioDAO {
 
     public void inserir(UsuarioBean usuario) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("insert into usuarios values (default, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstm = conexao.prepareStatement("insert into usuarios values (default, ?, ?, ?, ?, ?, ?)");
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getNascimento());
             pstm.setString(3, usuario.getTelefone());
             pstm.setString(4, usuario.getCpf());
-            pstm.setString(5, usuario.getEstado());
-            pstm.setString(6, usuario.getCidade());
-            pstm.setString(7, usuario.getEmail());
-            pstm.setString(8, usuario.getSenha());
+            pstm.setString(5, usuario.getEmail());
+            pstm.setString(6, usuario.getSenha());
             ResultSet rs = pstm.executeQuery();
             pstm.close();
             rs.close();
@@ -59,8 +57,31 @@ public class UsuarioDAO {
                 user.setNascimento(rs.getString("nascimento"));
                 user.setTelefone(rs.getString("telefone"));
                 user.setCpf(rs.getString("cpf"));
-                user.setEstado(rs.getString("estado"));
-                user.setCidade(rs.getString("cidade"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+                user.setAdm(rs.getBoolean("adm"));
+            }
+            pstm.close();
+            rs.close();
+            return user;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public UsuarioBean selecionaPorEmail(String email) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from usuarios where email = ?");
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+            UsuarioBean user = new UsuarioBean();
+            while (rs.next()) {
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setNascimento(rs.getString("nascimento"));
+                user.setTelefone(rs.getString("telefone"));
+                user.setCpf(rs.getString("cpf"));
                 user.setEmail(rs.getString("email"));
                 user.setSenha(rs.getString("senha"));
                 user.setAdm(rs.getBoolean("adm"));
@@ -81,8 +102,6 @@ public class UsuarioDAO {
             pstm.setString(2, usuario.getNascimento());
             pstm.setString(3, usuario.getTelefone());
             pstm.setString(4, usuario.getCpf());
-            pstm.setString(5, usuario.getCidade());
-            pstm.setString(6, usuario.getEstado());
             pstm.setString(7, usuario.getEmail());
             pstm.setString(8, usuario.getSenha());
             pstm.setInt(9, usuario.getCodigo());
@@ -100,8 +119,6 @@ public class UsuarioDAO {
             pstm.setString(2, usuario.getNascimento());
             pstm.setString(3, usuario.getTelefone());
             pstm.setString(4, usuario.getCpf());
-            pstm.setString(5, usuario.getCidade());
-            pstm.setString(6, usuario.getEstado());
             pstm.setString(7, usuario.getEmail());
             pstm.setInt(8, usuario.getCodigo());
             ResultSet rs = pstm.executeQuery();

@@ -48,13 +48,13 @@ public class Usuario extends HttpServlet {
             usuario.setNascimento(request.getParameter("nascimento"));
             usuario.setTelefone(request.getParameter("telefone"));
             usuario.setCpf(request.getParameter("cpf"));
-            usuario.setEstado(request.getParameter("estado"));
-            usuario.setCidade(request.getParameter("cidade"));
             usuario.setEmail(request.getParameter("email"));
             usuario.setSenha(request.getParameter("senha"));
 
             dao.inserir(usuario);
-            rd = request.getRequestDispatcher("login.jsp");
+            UsuarioBean u = dao.selecionaPorEmail(usuario.getEmail());
+            session.setAttribute("u_cadastrado", u);
+            rd = request.getRequestDispatcher("enderecoAdd.jsp");
             rd.forward(request, response);
         }
 
@@ -70,8 +70,6 @@ public class Usuario extends HttpServlet {
                     usuario.setNascimento(request.getParameter("nascimento"));
                     usuario.setTelefone(request.getParameter("telefone"));
                     usuario.setCpf(request.getParameter("cpf"));
-                    usuario.setEstado(request.getParameter("estado"));
-                    usuario.setCidade(request.getParameter("cidade"));
                     usuario.setEmail(request.getParameter("email"));
                     usuario.setSenha(request.getParameter("senhaNova"));
                     dao.editar(usuario);
@@ -79,7 +77,7 @@ public class Usuario extends HttpServlet {
                     rd = request.getRequestDispatcher("usuarioView.jsp");
                     rd.forward(request, response);
                 } else {
-                    session.setAttribute("erro_atualizar_user", "A senha atual não corresposde!");
+                    session.setAttribute("msg", "A senha atual não corresposde!");
                     rd = request.getRequestDispatcher("usuarioEdit.jsp");
                     rd.forward(request, response);
                 }
@@ -91,15 +89,13 @@ public class Usuario extends HttpServlet {
                     usuario.setNascimento(request.getParameter("nascimento"));
                     usuario.setTelefone(request.getParameter("telefone"));
                     usuario.setCpf(request.getParameter("cpf"));
-                    usuario.setEstado(request.getParameter("estado"));
-                    usuario.setCidade(request.getParameter("cidade"));
                     usuario.setEmail(request.getParameter("email"));
                     dao.editarSemSenha(usuario);
                     session.setAttribute("usuario", usuario);
                     rd = request.getRequestDispatcher("usuarioView.jsp");
                     rd.forward(request, response);
                 } else {
-                    session.setAttribute("erro_atualizar_user", "A senha atual não corresposde!");
+                    session.setAttribute("msg", "A senha atual não corresposde!");
                     rd = request.getRequestDispatcher("usuarioEdit.jsp");
                     rd.forward(request, response);
                 }
@@ -119,7 +115,7 @@ public class Usuario extends HttpServlet {
                 rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
             } else {
-                session.setAttribute("erro", "E-mail ou senha incorretos");
+                session.setAttribute("msg", "E-mail ou senha incorretos");
                 rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             }

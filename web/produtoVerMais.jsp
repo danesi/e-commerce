@@ -15,7 +15,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
-        <jsp:include page="Bases/erro.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <%
                 if (session.getAttribute("produto") != null) {
@@ -41,6 +41,7 @@
                                             <div class="row input-field">
                                                 <input id="quant" value="1" name="quant" type="number" min="1" max="<%= produto.getQuant_estoque()%>" required class="validate">
                                                 <label for="quant">Quantidade</label>
+                                                <small class="black-text">Quantidade de estoque: <%= produto.getQuant_estoque() %></small>
                                             </div>
                                         </div>
                                         <div class="row center">

@@ -45,16 +45,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s5 offset-l1">
-                                            <input id="estado" name="estado" type="text" required>
-                                            <label for="estado">Estado</label>
-                                        </div>
-                                        <div class="input-field col s5">
-                                            <input id="cidade" name="cidade" type="text" required>
-                                            <label for="cidade">Cidade</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s5 offset-l1">
                                             <input id="email" name="email" type="email" required>
                                             <label for="email">E-mail</label>
                                         </div>

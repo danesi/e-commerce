@@ -27,21 +27,19 @@
                             <span class="card-title black-text center">Olá <%= usuario.getNome()%></span>
                             <br>
                             <div class="row">
-                                <div class="collection col s4 z-depth-4">
+                                <div class="collection col s4 offset-l1 z-depth-4">
                                     <h6 class="center orange-text"><b>Infomações pessoais</b></h6>
                                     <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getNome()%></span><b>Nome</b>    </a>
                                     <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getNascimento()%></span><b>Nascimento</b></a>
                                     <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getTelefone()%></span><b>Telefone</b></a>
                                     <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getCpf()%></span><b>CPF</b></a>
-                                    <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getEstado()%></span><b>Estado</b></a>
-                                    <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getCidade()%></span><b>Cidade</b></a>
                                     <a href="#!" class="collection-item black-text"><span class="badge black-text"><%= usuario.getEmail()%></span><b>Email</b></a>
                                     <br>
                                     <div class="row center">
                                         <a href="usuarioEdit.jsp" class="waves-effect waves-light btn orange darken-3">Editar</a>
                                     </div>
                                 </div>
-                                <div class="collection col s6 offset-l1 z-depth-4">
+                                <div class="collection col s5 offset-l1  z-depth-4">
                                     <h6 class="center orange-text"><b>Ultimas compras</b></h6>
                                     <table class="black-text centered">
                                         <thead>
