@@ -119,6 +119,7 @@ public class Usuario extends HttpServlet {
                 rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
             } else {
+                session.setAttribute("erro", "E-mail ou senha incorretos");
                 rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             }

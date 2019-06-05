@@ -15,6 +15,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/erro.jsp" />
         <main>
             <%
                 if (session.getAttribute("produto") != null) {
@@ -28,7 +29,7 @@
                             <span class="card-title black-text center"><h4>Continuar compra do produto</h4></span>
                             <div class="row" >
                                 <div class="col s4">
-                                    <img src="Imagens/<%= produto.getImagem()%>" style="max-height: 300px" />
+                                    <img src="Imagens/<%= produto.getImagem()%>" height="300" width="320" />
                                 </div>
                                 <div class="row col s4 offset-l1">
                                     <h5 class="black-text"><%= produto.getNome()%></h5>
@@ -51,24 +52,23 @@
                                             <%
                                             } else {
                                             %>
-                                            <a href="login.jsp" class="waves-effect waves-light btn orange darken-3">Logar</a>
-                                            <h6 class="red-text">* Você precisa estar logado para continuar com a compra</h6>
+                                            <a href="login.jsp" class="waves-effect waves-light btn orange darken-3">Logar</a></div>                                            
                                             <%
                                                 }
                                             %>
 
-                                        </div>
-                                    </form>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <%
-                }
-            %>
-        </main>
-        <jsp:include page="Bases/footer.jsp" />
-    </body>
+        </div>
+        <%
+            }
+        %>
+    </main>
+    <jsp:include page="Bases/footer.jsp" />
+</body>
 </html>

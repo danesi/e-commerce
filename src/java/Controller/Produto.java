@@ -78,6 +78,9 @@ public class Produto extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             ProdutoBean produto = dao.selecionaPorId(id);
             session.setAttribute("produto", produto);
+            if (session.getAttribute("usuario") == null) {
+                session.setAttribute("erro", "Você presisa estar logado para adicionar ao carrinho");
+            }
             rd = request.getRequestDispatcher("produtoVerMais.jsp");
             rd.forward(request, response);
         }

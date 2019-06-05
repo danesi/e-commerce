@@ -40,8 +40,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s5 offset-l1">
-                                        <input id="preco" name="preco" type="number" class="validate" required>
+                                        <input id="preco" name="preco" type="number" class="validate" required step="0.01">
                                         <label for="preco">Preco</label>
+                                        <span class="helper-text">* Utilize a virgula como separador</span>
                                     </div>
                                     <div class="input-field col s5">
                                         <input id="quant_estoque" name="quant_estoque" type="number" class="validate" required>

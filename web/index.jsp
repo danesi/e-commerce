@@ -25,15 +25,18 @@
                         List<ProdutoBean> produtos = dao.selecionaTodos();
                         for (ProdutoBean produto : produtos) {%>
                     <div class="col s3">
-                        <div class="card">
+                        <div class="card z-depth-3">
+                            <a href="Produto?acao=verProduto&id=<%= produto.getCodigo()%>" >
                             <div class="card-image">
-                                <img src="Imagens/<%= produto.getImagem()%>" style="max-height: 40vh; max-width: 32vh">
-                                <a class="btn-floating halfway-fab waves-effect waves-light orange darken-3" href="Produto?acao=verProduto&id=<%= produto.getCodigo()%>"><i class="material-icons">add</i></a>
+                                <img src="Imagens/<%= produto.getImagem()%>" height="200" width="150">
                             </div>
                             <div class="card-content">
-                                <span class="card-title"><%= produto.getNome()%></span>
-                                Preço: <%= produto.getPreco()%> R$
+                                <div class="divider"></div>
+                                <h5 class="black-text"><%= produto.getNome()%></h5>
+                                <h6 class="black-text"><%= String.format("R$ %,.2f", produto.getPreco()).replace(",", ".") %></h6>
+                                <small class="black-text"><%= produto.getQuant_estoque() %> produtos no estoque</small>
                             </div>
+                            </a>
                         </div>
                     </div>
                     <%
@@ -45,12 +48,3 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
-<%
-    if (session.getAttribute("erro") != null) {%>
-<script>
-    alert("<%= session.getAttribute("erro")%>");
-</script>
-<%
-    }
-%>
-
