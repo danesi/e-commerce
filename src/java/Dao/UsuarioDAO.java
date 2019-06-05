@@ -95,6 +95,31 @@ public class UsuarioDAO {
         return null;
     }
 
+    public UsuarioBean selecionaPorId(int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from usuarios where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            UsuarioBean user = new UsuarioBean();
+            while (rs.next()) {
+                user.setCodigo(rs.getInt("codigo"));
+                user.setNome(rs.getString("nome"));
+                user.setNascimento(rs.getString("nascimento"));
+                user.setTelefone(rs.getString("telefone"));
+                user.setCpf(rs.getString("cpf"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+                user.setAdm(rs.getBoolean("adm"));
+            }
+            pstm.close();
+            rs.close();
+            return user;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    
     public void editar(UsuarioBean usuario) {
         try {
             PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, cidade = ?, estado = ?, email = ?, senha = ? where codigo = ?");

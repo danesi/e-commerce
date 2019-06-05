@@ -20,6 +20,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title center black-text">Cadastrar Usuário</span>
+                            <br>
+                            <div class="divider orange"></div>
                             <p>
                             <div class="row">
                                 <form action="Usuario?acao=cadastrar" method="post">

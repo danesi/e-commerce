@@ -26,6 +26,8 @@
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Olá <%= usuario.getNome()%></span>
                             <br>
+                            <div class="divider orange"></div>
+                            <br>
                             <div class="row">
                                 <div class="collection col s4 offset-l1 z-depth-4">
                                     <h6 class="center orange-text"><b>Infomações pessoais</b></h6>

@@ -24,6 +24,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Editar Produto <%= produto.getNome()%></span>
+                            <br>
+                            <div class="divider orange"></div>
                             <div class="row">
                                 <form action="Produto?acao=editar&id=<%= produto.getCodigo()%>" method="post" enctype="multipart/form-data">
                                     <div class="row">

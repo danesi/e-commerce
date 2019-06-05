@@ -7,17 +7,6 @@
 <%@page import="Model.UsuarioBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    if (session.getAttribute("erro_atualizar_user") != null) {
-        String a = (String) session.getAttribute("erro_atualizar_user");
-        System.out.println(a);
-%>
-<script>
-    alert(<%= a %>);
-</script>
-<%
-    }
-%>
 <html>
     <head>
         <jsp:include page="Bases/materialize.jsp" />
@@ -37,6 +26,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Editar usuário</span>
+                            <br>
+                            <div class="divider orange"></div>
                             <br>
                             <p>
                             <div class="row">

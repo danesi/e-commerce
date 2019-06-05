@@ -57,6 +57,47 @@ public class Endereco extends HttpServlet {
             rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
         }
+        
+        if (acao.equalsIgnoreCase("cadastrarDepois")) {
+            EnderecoBean endereco = new EnderecoBean();
+            endereco.setEndereco(request.getParameter("endereco"));
+            endereco.setCep(request.getParameter("cep"));
+            endereco.setNum_casa(Integer.parseInt(request.getParameter("num_casa")));
+            endereco.setComplemento(request.getParameter("complemento"));
+            endereco.setEstado(request.getParameter("estado"));
+            endereco.setCidade(request.getParameter("cidade"));
+            UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
+            endereco.setUsuario(usuario);
+            
+            dao.cadastrar(endereco);
+            session.setAttribute("endereco", endereco);
+            session.setAttribute("msg", "Endereço cadastrado");
+            rd = request.getRequestDispatcher("vendaAdd.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (acao.equalsIgnoreCase("editarDaVenda")) {
+            rd = request.getRequestDispatcher("enderecoEdit.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (acao.equalsIgnoreCase("editarParaVenda")) {
+            EnderecoBean endereco = new EnderecoBean();
+            endereco.setEndereco(request.getParameter("endereco"));
+            endereco.setCep(request.getParameter("cep"));
+            endereco.setNum_casa(Integer.parseInt(request.getParameter("num_casa")));
+            endereco.setComplemento(request.getParameter("complemento"));
+            endereco.setEstado(request.getParameter("estado"));
+            endereco.setCidade(request.getParameter("cidade"));
+            UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
+            
+            endereco.setUsuario(usuario);
+            dao.editar(endereco);
+            EnderecoBean e = dao.selecionaPorIdUsuario(usuario.getCodigo());
+            session.setAttribute("endereco", e);
+            rd = request.getRequestDispatcher("vendaAdd.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

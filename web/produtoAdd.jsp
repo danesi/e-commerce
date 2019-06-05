@@ -26,6 +26,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Cadastro de produtos</span>
+                            <br>
+                            <div class="divider orange"></div>
                             <form action="Produto?acao=cadastrar" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="input-field col s5 offset-l1">

@@ -28,6 +28,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Produtos no carrinho</span>
+                            <br>
+                            <div class="divider orange"></div>
                             <div class="col s10 offset-l1">
                                 <table class="black-text">
                                     <thead>
@@ -48,7 +50,7 @@
                                             <td><%= produto.getNome()%></td>
                                             <td><%= produto.getQuant()%></td>
                                             <td><%= produto.getPreco()%> R$</td>
-                                            <td><%= precoUnitario%> R$</td>
+                                            <td><%= String.format("R$ %,.2f", precoUnitario).replace(",", ".") %> R$</td>
                                             <td><a href="Produto?acao=removeCarrinho&id=<%= produto.getCodigo()%>"<i class="material-icons black-text">delete</i></a></td>
                                         </tr>
                                         <%
@@ -63,10 +65,10 @@
                             </div>
                             <br>
                             <div class="row center">
-                                <h5 class="black-text">Preço total a pagar: <%= precoFinal%> R$</h5>
+                                <h5 class="black-text">Preço total a pagar: <%= String.format("R$ %,.2f", precoFinal).replace(",", ".")%> R$</h5>
                                 <br>
                                 <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Continuar comprando</a>
-                                <a href="vendaAdd.jsp" class="waves-effect waves-light btn orange darken-3">Concluir compra</a>
+                                <a href="Venda?acao=concluir" class="waves-effect waves-light btn orange darken-3">Concluir compra</a>
                             </div>
                         </div>
                     </div>

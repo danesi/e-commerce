@@ -28,6 +28,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center">Todos os produtos</span>
+                            <br>
+                            <div class="divider orange"></div>
                             <%
                                 if (session.getAttribute("produtos") != null) {
                                     List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("produtos");

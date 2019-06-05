@@ -28,7 +28,7 @@
                         <div class="card z-depth-3">
                             <a href="Produto?acao=verProduto&id=<%= produto.getCodigo()%>" >
                             <div class="card-image">
-                                <img src="Imagens/<%= produto.getImagem()%>" height="200" width="150">
+                                <img src="Imagens/<%= produto.getImagem()%>" height="220" width="150">
                             </div>
                             <div class="card-content">
                                 <div class="divider"></div>

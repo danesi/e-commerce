@@ -25,7 +25,9 @@
                 <div class="col s8 offset-l2">
                     <div class="card white">
                         <div class="card-content white-text">
-                            <span class="card-title center black-text">Cadastrar Endereço do <%= usuario.getNome() %></span>
+                            <span class="card-title center black-text">Cadastrar Endereço do <%= usuario.getNome() %></span
+                            <br>
+                            <div class="divider orange"></div>
                             <form method="post" action="Endereco?acao=cadastrar">
                                 <div class="row">
                                     <div class="input-field col s5 offset-l1">

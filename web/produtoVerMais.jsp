@@ -27,6 +27,8 @@
                     <div class="card white">
                         <div class="card-content white-text">
                             <span class="card-title black-text center"><h4>Continuar compra do produto</h4></span>
+                            <br>
+                            <div class="divider orange"></div>
                             <div class="row" >
                                 <div class="col s4">
                                     <img src="Imagens/<%= produto.getImagem()%>" height="300" width="320" />
@@ -45,7 +47,7 @@
                                             </div>
                                         </div>
                                         <div class="row center">
-                                            <a class="waves-effect waves-light btn grey darken-3">Cancelar</a>
+                                            <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Cancelar</a>
                                             <%
                                                 if (session.getAttribute("usuario") != null) {
                                             %>

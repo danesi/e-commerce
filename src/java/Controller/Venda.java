@@ -5,6 +5,9 @@
  */
 package Controller;
 
+import Dao.EnderecoDao;
+import Model.EnderecoBean;
+import Model.UsuarioBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +38,20 @@ public class Venda extends HttpServlet {
         String acao = request.getParameter("acao");
         RequestDispatcher rd = null;
         
-        if (acao.equalsIgnoreCase("adicionar")) {
+        if (acao.equalsIgnoreCase("concluir")) {
+            EnderecoDao enderecoDao = new EnderecoDao();
+            if (session.getAttribute("usuario") != null) {
+                UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
+                EnderecoBean endereco = enderecoDao.selecionaPorIdUsuario(usuario.getCodigo());
+                if (endereco.getComplemento() != null) {
+                    session.setAttribute("endereco", endereco);
+                }                
+            }           
+            rd = request.getRequestDispatcher("vendaAdd.jsp");
+            rd.forward(request, response);
+        }
+        
+        if (acao.equalsIgnoreCase("cadastrar")) {
             
         }
     }
