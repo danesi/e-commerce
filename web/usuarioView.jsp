@@ -121,7 +121,7 @@
                                                         <tr>
                                                             <td><%= venda.getData()%></td>
                                                             <td><%= venda.getPreco()%> R$</td>
-                                                            <td><a href="Venda?acao=verVenda&id=<%= venda %>" ><i class="material-icons black-text">zoom_in</i></a></td>
+                                                            <td><a href="Venda?acao=verVenda&id=<%= venda.getCodigo() %>" ><i class="material-icons black-text">zoom_in</i></a></td>
                                                         </tr>
                                                         <%
                                                             }

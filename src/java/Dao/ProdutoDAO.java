@@ -31,7 +31,7 @@ public class ProdutoDAO {
 
     public List<ProdutoBean> selecionaTodos() {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from produtos");
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by codigo");
             ResultSet rs = pstm.executeQuery();
             List<ProdutoBean> produtos = new ArrayList<>();
             while (rs.next()) {
@@ -57,7 +57,7 @@ public class ProdutoDAO {
 
     public List<ProdutoBean> selecionaTodosParaEditar() {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from produtos");
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by codigo");
             ResultSet rs = pstm.executeQuery();
             List<ProdutoBean> produtos = new ArrayList<>();
             while (rs.next()) {

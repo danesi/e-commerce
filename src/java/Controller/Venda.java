@@ -11,6 +11,7 @@ import Model.EnderecoBean;
 import Model.ProdutoBean;
 import Model.UsuarioBean;
 import Model.VendaBean;
+import Model.Venda_ItemVendaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -77,12 +78,19 @@ public class Venda extends HttpServlet {
             venda.setUsuario(usuario);
              
             dao.cadastrar(venda);
-            VendaDAO vDAO = new VendaDAO();
-            int id = vDAO.selecionaUltima();
+            int id = dao.selecionaUltima();
             System.out.println(id);
-            VendaBean vendaB = vDAO.selecionaPorId(id);
+            VendaBean vendaB = dao.selecionaPorId(id);
             session.setAttribute("vendaCadastrada", vendaB);
             rd = request.getRequestDispatcher("ItemVenda?acao=cadastrar");
+            rd.forward(request, response);
+        }
+        
+        if (acao.equalsIgnoreCase("verVenda")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            List<Venda_ItemVendaBean> venda = dao.selecionaVenda(id);
+            session.setAttribute("vendaView", venda);
+            rd = request.getRequestDispatcher("vendaView.jsp");
             rd.forward(request, response);
         }
     }

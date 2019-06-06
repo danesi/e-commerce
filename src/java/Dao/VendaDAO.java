@@ -6,10 +6,12 @@
 package Dao;
 
 import Model.VendaBean;
+import Model.Venda_ItemVendaBean;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,9 @@ import java.util.List;
  */
 public class VendaDAO {
     private Connection conexao;
+    SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");   
+    UsuarioDAO Udao = new UsuarioDAO();
+    ProdutoDAO Pdao = new ProdutoDAO();
 
     public VendaDAO() {
         try {
@@ -50,9 +55,9 @@ public class VendaDAO {
             while(rs.next()) {
                 VendaBean venda = new VendaBean();
                 venda.setCodigo(rs.getInt("codigo"));
-                venda.setData(String.valueOf(rs.getDate("data")));
+                venda.setData(fmt.format(rs.getDate("data")));
                 venda.setPreco(rs.getDouble("preco"));
-                UsuarioDAO Udao = new UsuarioDAO();
+                
                 venda.setUsuario(Udao.selecionaPorId(rs.getInt("cod_usuario")));
                 vendas.add(venda);
             }
@@ -65,7 +70,6 @@ public class VendaDAO {
     }
     
     public int selecionaUltima() {
-        
         try {
             int id = 0;
             PreparedStatement pstm = conexao.prepareStatement("Select Max(codigo) as codigo from venda ");
@@ -87,14 +91,35 @@ public class VendaDAO {
             VendaBean venda = new VendaBean();
             while(rs.next()) {
                 venda.setCodigo(rs.getInt("codigo"));
-                venda.setData(String.valueOf(rs.getDate("data")));
+                venda.setData(fmt.format(rs.getDate("data")));
                 venda.setPreco(rs.getDouble("preco"));
-                UsuarioDAO Udao = new UsuarioDAO();
                 venda.setUsuario(Udao.selecionaPorId(rs.getInt("cod_usuario")));
             }
             pstm.close();
             rs.close();
             return venda;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public List<Venda_ItemVendaBean> selecionaVenda(int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from venda v, item_venda i where v.codigo = i.cod_venda and v.codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            List<Venda_ItemVendaBean> vendas = new ArrayList<>();
+            while(rs.next()) {
+                Venda_ItemVendaBean venda = new Venda_ItemVendaBean();
+                venda.setData(fmt.format(rs.getDate("data")));
+                venda.setProduto(Pdao.selecionaPorId(rs.getInt("cod_produto")));
+                venda.setPreco(rs.getDouble("preco"));
+                venda.setQuantidade(rs.getInt("quantidade"));
+                vendas.add(venda);
+            }
+            pstm.close();
+            rs.close();
+            return vendas;
         } catch (Exception e) {
         }
         return null;
