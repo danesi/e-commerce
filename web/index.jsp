@@ -17,6 +17,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <div class="container col s10 offset-l1">
                 <div class="row">

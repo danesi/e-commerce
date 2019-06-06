@@ -5,16 +5,12 @@
  */
 package Controller;
 
-import Dao.EnderecoDao;
-import Dao.VendaDAO;
-import Model.EnderecoBean;
+import Dao.ItemVendaDao;
+import Model.ItemVendaBean;
 import Model.ProdutoBean;
 import Model.UsuarioBean;
-import Model.VendaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Anesi
  */
-public class Venda extends HttpServlet {
+public class ItemVenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,45 +36,25 @@ public class Venda extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
         RequestDispatcher rd = null;
         
-        VendaDAO dao = new VendaDAO();
-        
-        if (acao.equalsIgnoreCase("concluir")) {
-            EnderecoDao enderecoDao = new EnderecoDao();
-            if (session.getAttribute("usuario") != null) {
-                UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
-                EnderecoBean endereco = enderecoDao.selecionaPorIdUsuario(usuario.getCodigo());
-                if (endereco.getComplemento() != null) {
-                    session.setAttribute("endereco", endereco);
-                }                
-            }           
-            rd = request.getRequestDispatcher("vendaAdd.jsp");
-            rd.forward(request, response);
-        }
+        ItemVendaDao dao = new ItemVendaDao();
         
         if (acao.equalsIgnoreCase("cadastrar")) {
-            Date data = new Date();
-            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
-            double precoTotal = 0;
             List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
             UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
             for (ProdutoBean produto : produtos) {
-                precoTotal += produto.getPreco() * produto.getQuant();
+                ItemVendaBean ivb = new ItemVendaBean();
+                ivb.setProduto(produto);
+                ivb.setUsuario(usuario);
+                ivb.setQuantidade(produto.getQuant());
+                dao.cadastrar(ivb);
             }
-            
-            System.out.println(usuario.getNome());
-            VendaBean venda = new VendaBean();
-            venda.setData(formatador.format(data));
-            venda.setPreco(precoTotal);
-            venda.setUsuario(usuario);
-             
-            dao.cadastrar(venda);
-            
-            rd = request.getRequestDispatcher("ItemVenda?acao=cadastrar");
+            session.setAttribute("msg", "Compra efetuada com sucesso");
+            session.setAttribute("carrinho", null);
+            rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
     }

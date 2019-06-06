@@ -5,9 +5,8 @@
  */
 package Dao;
 
-import Model.VendaBean;
+import Model.ItemVendaBean;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -15,10 +14,10 @@ import java.sql.ResultSet;
  *
  * @author Anesi
  */
-public class VendaDAO {
+public class ItemVendaDao {
     private Connection conexao;
 
-    public VendaDAO() {
+    public ItemVendaDao() {
         try {
             this.conexao = Conexao.getConnection();
         } catch (Exception e) {
@@ -26,12 +25,12 @@ public class VendaDAO {
         }
     }
     
-    public void cadastrar(VendaBean venda) {
+    public void cadastrar(ItemVendaBean itemVenda) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("insert into venda values (default, ?, ?, ?)");
-            pstm.setDate(1, Date.valueOf(venda.getData()));
-            pstm.setDouble(2, venda.getPreco());
-            pstm.setInt(3, venda.getUsuario().getCodigo());
+            PreparedStatement pstm = conexao.prepareStatement("insert into item_venda values (default, ?, ?, ?)");
+            pstm.setInt(1, itemVenda.getProduto().getCodigo());
+            pstm.setInt(2, itemVenda.getUsuario().getCodigo());
+            pstm.setInt(3, itemVenda.getQuantidade());
             ResultSet rs = pstm.executeQuery();
             pstm.close();
             rs.close();

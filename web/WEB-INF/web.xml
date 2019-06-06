@@ -16,6 +16,10 @@
         <servlet-name>Endereco</servlet-name>
         <servlet-class>Controller.Endereco</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ItemVenda</servlet-name>
+        <servlet-class>Controller.ItemVenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Usuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Endereco</servlet-name>
         <url-pattern>/Endereco</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemVenda</servlet-name>
+        <url-pattern>/ItemVenda</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
