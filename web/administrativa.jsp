@@ -22,6 +22,35 @@
                             <span class="card-title black-text center">Área administrativa</span>
                             <br>
                             <div class="divider orange"></div>
+                            <br>
+                            <div class="row">                                
+                                <div class="col s3 offset-l1">
+                                    <div class="card z-depth-3">
+                                        <a href="#!" >
+                                            <div class="card-image">
+                                                <img class="center" src="Imagens/cheers.svg" height="220" width="150">
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="divider"></div>
+                                                <h5 class="black-text center">Cadastrar produto</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col s3">
+                                    <div class="card z-depth-3">
+                                        <a href="#!" >
+                                            <div class="card-image">
+                                                <img class="center" src="Imagens/edit (1).svg" height="220" width="150">
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="divider"></div>
+                                                <h5 class="black-text center">Editar produto</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                             <a href="Produto?acao=verProdutos" class="waves-effect waves-light btn orange darken-3">Editar produtos</a>
                             <a href="produtoAdd.jsp" class="waves-effect waves-light btn orange darken-3">Cadastrar produtos</a>
                         </div>

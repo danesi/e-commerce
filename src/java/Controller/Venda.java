@@ -77,7 +77,11 @@ public class Venda extends HttpServlet {
             venda.setUsuario(usuario);
              
             dao.cadastrar(venda);
-            
+            VendaDAO vDAO = new VendaDAO();
+            int id = vDAO.selecionaUltima();
+            System.out.println(id);
+            VendaBean vendaB = vDAO.selecionaPorId(id);
+            session.setAttribute("vendaCadastrada", vendaB);
             rd = request.getRequestDispatcher("ItemVenda?acao=cadastrar");
             rd.forward(request, response);
         }

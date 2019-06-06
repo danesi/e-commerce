@@ -12,7 +12,7 @@ package Model;
 public class ItemVendaBean {
     private int codigo;
     private ProdutoBean produto;
-    private UsuarioBean usuario;
+    private VendaBean venda;
     private int quantidade;
 
     public int getCodigo() {
@@ -31,20 +31,20 @@ public class ItemVendaBean {
         this.produto = produto;
     }
 
-    public UsuarioBean getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioBean usuario) {
-        this.usuario = usuario;
-    }
-
     public int getQuantidade() {
         return quantidade;
     }
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public VendaBean getVenda() {
+        return venda;
+    }
+
+    public void setVenda(VendaBean venda) {
+        this.venda = venda;
     }
     
     

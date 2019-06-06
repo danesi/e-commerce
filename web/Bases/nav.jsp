@@ -10,7 +10,7 @@
                     UsuarioBean usuario = new UsuarioBean();
                     usuario = (UsuarioBean) session.getAttribute("usuario");
             %>
-            <li><a href="usuarioView.jsp"><%= usuario.getNome()%></a></li>
+            <li><a href="Usuario?acao=verUsuario"><%= usuario.getNome()%></a></li>
                 <%
                     if (usuario.isAdm()) {
                 %>

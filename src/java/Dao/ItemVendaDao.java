@@ -29,7 +29,7 @@ public class ItemVendaDao {
         try {
             PreparedStatement pstm = conexao.prepareStatement("insert into item_venda values (default, ?, ?, ?)");
             pstm.setInt(1, itemVenda.getProduto().getCodigo());
-            pstm.setInt(2, itemVenda.getUsuario().getCodigo());
+            pstm.setInt(2, itemVenda.getVenda().getCodigo());
             pstm.setInt(3, itemVenda.getQuantidade());
             ResultSet rs = pstm.executeQuery();
             pstm.close();

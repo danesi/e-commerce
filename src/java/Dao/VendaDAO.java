@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,5 +39,64 @@ public class VendaDAO {
             rs.close();
         } catch (Exception e) {
         }
+    }
+    
+    public List<VendaBean> selecionaPorUsuario(int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from venda where cod_usuario = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            List<VendaBean> vendas = new ArrayList<>();
+            while(rs.next()) {
+                VendaBean venda = new VendaBean();
+                venda.setCodigo(rs.getInt("codigo"));
+                venda.setData(String.valueOf(rs.getDate("data")));
+                venda.setPreco(rs.getDouble("preco"));
+                UsuarioDAO Udao = new UsuarioDAO();
+                venda.setUsuario(Udao.selecionaPorId(rs.getInt("cod_usuario")));
+                vendas.add(venda);
+            }
+            pstm.close();
+            rs.close();
+            return vendas;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public int selecionaUltima() {
+        
+        try {
+            int id = 0;
+            PreparedStatement pstm = conexao.prepareStatement("Select Max(codigo) as codigo from venda ");
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()) {
+                id = rs.getInt("codigo");
+            }
+            return id;
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public VendaBean selecionaPorId(int id) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select * from venda where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            VendaBean venda = new VendaBean();
+            while(rs.next()) {
+                venda.setCodigo(rs.getInt("codigo"));
+                venda.setData(String.valueOf(rs.getDate("data")));
+                venda.setPreco(rs.getDouble("preco"));
+                UsuarioDAO Udao = new UsuarioDAO();
+                venda.setUsuario(Udao.selecionaPorId(rs.getInt("cod_usuario")));
+            }
+            pstm.close();
+            rs.close();
+            return venda;
+        } catch (Exception e) {
+        }
+        return null;
     }
 }

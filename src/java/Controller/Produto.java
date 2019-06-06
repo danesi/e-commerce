@@ -203,7 +203,7 @@ public class Produto extends HttpServlet {
         }
 
         if (acao.equalsIgnoreCase("verProdutos")) {
-            List<ProdutoBean> produtos = dao.selecionaTodos();
+            List<ProdutoBean> produtos = dao.selecionaTodosParaEditar();
             session.setAttribute("produtos", produtos);
             rd = request.getRequestDispatcher("produtoView.jsp");
             rd.forward(request, response);

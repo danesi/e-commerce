@@ -6,9 +6,11 @@
 package Controller;
 
 import Dao.ItemVendaDao;
+import Dao.VendaDAO;
 import Model.ItemVendaBean;
 import Model.ProdutoBean;
 import Model.UsuarioBean;
+import Model.VendaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -44,11 +46,11 @@ public class ItemVenda extends HttpServlet {
         
         if (acao.equalsIgnoreCase("cadastrar")) {
             List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
-            UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
+            VendaBean venda = (VendaBean) session.getAttribute("vendaCadastrada");
             for (ProdutoBean produto : produtos) {
                 ItemVendaBean ivb = new ItemVendaBean();
                 ivb.setProduto(produto);
-                ivb.setUsuario(usuario);
+                ivb.setVenda(venda);
                 ivb.setQuantidade(produto.getQuant());
                 dao.cadastrar(ivb);
             }

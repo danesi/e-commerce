@@ -5,11 +5,16 @@
  */
 package Controller;
 
+import Dao.EnderecoDao;
 import Dao.UsuarioDAO;
+import Dao.VendaDAO;
+import Model.EnderecoBean;
 import Model.UsuarioBean;
+import Model.VendaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -119,6 +124,21 @@ public class Usuario extends HttpServlet {
                 rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             }
+        }
+
+        if (acao.equalsIgnoreCase("verUsuario")) {
+            UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
+            EnderecoDao Edao = new EnderecoDao();
+            EnderecoBean endereco = Edao.selecionaPorIdUsuario(usuario.getCodigo());
+            session.setAttribute("endereco", endereco);
+            
+            VendaDAO Vdao = new VendaDAO();
+            List<VendaBean> vendas = Vdao.selecionaPorUsuario(usuario.getCodigo());
+            
+            session.setAttribute("vendas", vendas);
+            
+            rd = request.getRequestDispatcher("usuarioView.jsp");
+            rd.forward(request, response);
         }
 
         if (acao.equalsIgnoreCase("sair")) {
