@@ -9,7 +9,12 @@ import Dao.RelatorioDao;
 import Model.RelatorioBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +42,24 @@ public class Relatorio extends HttpServlet {
         HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
         RequestDispatcher rd = null;
-        
+
         RelatorioDao dao = new RelatorioDao();
-        
-        if(acao.equalsIgnoreCase("produtoMaisVendido")){
+
+        if (acao.equalsIgnoreCase("produtoMaisVendido")) {
             List<RelatorioBean> relatorios = dao.proMaisVendido();
             session.setAttribute("produtoMaisVendido", relatorios);
             rd = request.getRequestDispatcher("produtosMaisVendidos.jsp");
+            rd.forward(request, response);
+        }
+
+        if (acao.equalsIgnoreCase("entreDatas")) {
+            String dataInicial = request.getParameter("dataInicial");
+            String dataFinal = request.getParameter("dataFinal");
+            System.out.println(dataInicial);
+            System.out.println(dataFinal);
+            List<RelatorioBean> relatorios = dao.entreDatas(dataInicial, dataFinal);
+            session.setAttribute("entreDatas", relatorios);
+            rd = request.getRequestDispatcher("produtoPorData.jsp");
             rd.forward(request, response);
         }
     }

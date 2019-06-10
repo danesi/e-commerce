@@ -43,11 +43,32 @@
                                             <div class="collapsible-header"><i class="material-icons orange-text">assignment</i><b>Relatórios</b></div>
                                             <div class="collapsible-body">
                                                 <div class="row">
-                                                    <div class="collection">
-                                                        <a href="Relatorio?acao=produtoMaisVendido" class="collection-item center black-text">Produtos mais vendido</a>
-                                                        <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
-                                                        <a href="#!" class="collection-item">Alan</a>
-                                                        <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a>
+                                                    <div>
+                                                        <ul class="collapsible black-text">
+                                                            <li>
+                                                                <a href="Relatorio?acao=produtoMaisVendido" class="black-text"><div class="collapsible-header disabled"><i class="material-icons orange-text">shopping_basket</i><b>Produtos mais vendidos</b></div></a>
+                                                            </li>
+                                                            <li>
+                                                                <div class="collapsible-header"><i class="material-icons orange-text">shopping_basket</i><b>Valor vendido entre datas</b></div>
+                                                                <div class="collapsible-body">
+                                                                    <form action="Relatorio?acao=entreDatas" method="post">
+                                                                        <div class="row">
+                                                                            <div class="input-field col s5 offset-l1">
+                                                                                <input id="dataInicial" name="dataInicial" type="text" class="validate" required>
+                                                                                <label for="dataInicial">Data Inicial</label>
+                                                                            </div>
+                                                                            <div class="input-field col s5">
+                                                                                <input id="dataFinal" name="dataFinal" type="text" value="10/06/2019" class="validate" required>
+                                                                                <label for="dataFinal">Data Final</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row center">
+                                                                            <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Continuar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,4 +89,10 @@
     for (var i = 0; i < collapsibles.length; i++) {
         M.Collapsible.init(collapsibles[i]);
     }
+
+    $(document).ready(function () {
+        $('#dataInicial').mask('00/00/0000');
+        $('#dataFinal').mask('00/00/0000');
+    });
+
 </script>

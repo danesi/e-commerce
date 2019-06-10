@@ -13,7 +13,10 @@ import Model.UsuarioBean;
 import Model.VendaBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,6 +178,7 @@ public class Usuario extends HttpServlet {
                 rd.forward(request, response);
             }
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
