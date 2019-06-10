@@ -48,13 +48,10 @@
                                             <br>
                                             <a href="usuarioAdd.jsp" class="orange-text">Cadastre-se</a>
                                         </div>
+                                        <div class="row center" >
+                                            <a href="recuperarSenha.jsp" class="orange-text">Esqueceu a senha?</a>
+                                        </div>
                                     </div>
-                                    <%
-                                        if (request.getParameter("msg") != null) { %>
-                                    <h6 class="black-text">Usuario ou senha incorretos</h6>
-                                    <%
-                                        }
-                                    %>
                                 </form>
                             </div>
                             </p>

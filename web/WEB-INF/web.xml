@@ -20,6 +20,10 @@
         <servlet-name>ItemVenda</servlet-name>
         <servlet-class>Controller.ItemVenda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Relatorio</servlet-name>
+        <servlet-class>Controller.Relatorio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Usuario</servlet-name>
         <url-pattern>/Usuario</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ItemVenda</servlet-name>
         <url-pattern>/ItemVenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Relatorio</servlet-name>
+        <url-pattern>/Relatorio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -35,7 +35,7 @@
                                 <div class="col s10 offset-l1">
                                     <ul class="collapsible black-text popout">
                                         <li>
-                                            <div class="collapsible-header"><i class="material-icons orange-text">person_outline</i><b>Informações pessoais</b></div>
+                                            <div class="collapsible-header"><i class="material-icons orange-text">person</i><b>Informações pessoais</b></div>
                                             <div class="collapsible-body">
                                                 <table>
                                                     <thead>

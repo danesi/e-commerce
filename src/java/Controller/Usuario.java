@@ -131,12 +131,12 @@ public class Usuario extends HttpServlet {
             EnderecoDao Edao = new EnderecoDao();
             EnderecoBean endereco = Edao.selecionaPorIdUsuario(usuario.getCodigo());
             session.setAttribute("endereco", endereco);
-            
+
             VendaDAO Vdao = new VendaDAO();
             List<VendaBean> vendas = Vdao.selecionaPorUsuario(usuario.getCodigo());
-            
+
             session.setAttribute("vendas", vendas);
-            
+
             rd = request.getRequestDispatcher("usuarioView.jsp");
             rd.forward(request, response);
         }
@@ -145,6 +145,35 @@ public class Usuario extends HttpServlet {
             session.invalidate();
             rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
+        }
+
+        if (acao.equalsIgnoreCase("rSenha")) {
+            String email = request.getParameter("email");
+            UsuarioBean usuario = dao.selecionaPorEmail(email);
+            if (usuario.getNome() != null) {
+                session.setAttribute("rs", usuario);
+                rd = request.getRequestDispatcher("recuperarSenha.jsp");
+                rd.forward(request, response);
+            } else {
+                session.setAttribute("msg", "Email não encontrado na base de dados");
+                rd = request.getRequestDispatcher("recuperarSenha.jsp");
+                rd.forward(request, response);
+            }
+        }
+
+        if (acao.equalsIgnoreCase("novaSenha")) {
+            if (request.getParameter("senha1").equals(request.getParameter("senha2"))) {
+                UsuarioBean usuario = (UsuarioBean) session.getAttribute("rs");
+                usuario.setSenha(request.getParameter("senha1"));
+                dao.editar(usuario);
+                session.setAttribute("msg", "Senha alterada com sucesso!");
+                rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            } else {
+                session.setAttribute("msg", "As senhas não correspondem");
+                rd = request.getRequestDispatcher("recuperarSenha.jsp");
+                rd.forward(request, response);
+            }
         }
     }
 
