@@ -53,10 +53,7 @@ public class RelatorioDao {
 
     public List<RelatorioBean> entreDatas(String inicial, String dfinal) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * FROM venda WHERE (data BETWEEN ? AND ?)");
-            System.out.println(inicial);
-            pstm.setString(1, "'"+inicial+"'");
-            pstm.setString(2, "'"+dfinal+"'");
+            PreparedStatement pstm = conexao.prepareStatement("select * FROM venda WHERE (data BETWEEN '" + inicial + "' AND '" + dfinal + "')");
             ResultSet rs = pstm.executeQuery();
             List<RelatorioBean> relatorios = new ArrayList<>();
             while (rs.next()) {
@@ -69,7 +66,7 @@ public class RelatorioDao {
             }
             return relatorios;
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println("ERROR: " + e.getMessage());
         }
 
         return null;

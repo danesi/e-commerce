@@ -23,7 +23,7 @@
                 <div class="col s10 offset-l1">
                     <div class="card white">
                         <div class="card-content white-text">
-                            <span class="card-title black-text center">Produtos mais vendidos</span>
+                            <span class="card-title black-text center">Valor arrecadado entre <%= String.valueOf(session.getAttribute("datas")) %></span>
                             <br>
                             <div class="divider orange"></div>
                             <br>
@@ -40,7 +40,7 @@
                                                 valor += relatorio.getVenda().getPreco();
                                             }
                                 %>
-                                <h2 class="black-text"><%= valor %></h2>
+                                <h2 class="black-text center"><%= valor %> R$</h2>
                                 <%
                                         }
                                     }

@@ -55,9 +55,8 @@ public class Relatorio extends HttpServlet {
         if (acao.equalsIgnoreCase("entreDatas")) {
             String dataInicial = request.getParameter("dataInicial");
             String dataFinal = request.getParameter("dataFinal");
-            System.out.println(dataInicial);
-            System.out.println(dataFinal);
             List<RelatorioBean> relatorios = dao.entreDatas(dataInicial, dataFinal);
+            session.setAttribute("datas", dataInicial + " e " + dataFinal);
             session.setAttribute("entreDatas", relatorios);
             rd = request.getRequestDispatcher("produtoPorData.jsp");
             rd.forward(request, response);
