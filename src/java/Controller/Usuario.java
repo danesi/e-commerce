@@ -62,6 +62,7 @@ public class Usuario extends HttpServlet {
             dao.inserir(usuario);
             UsuarioBean u = dao.selecionaPorEmail(usuario.getEmail());
             session.setAttribute("u_cadastrado", u);
+            session.setAttribute("msg", "Usuario cadastrado!");
             rd = request.getRequestDispatcher("enderecoAdd.jsp");
             rd.forward(request, response);
         }
@@ -168,7 +169,8 @@ public class Usuario extends HttpServlet {
             if (request.getParameter("senha1").equals(request.getParameter("senha2"))) {
                 UsuarioBean usuario = (UsuarioBean) session.getAttribute("rs");
                 usuario.setSenha(request.getParameter("senha1"));
-                dao.editar(usuario);
+                System.out.println(request.getParameter("senha1"));
+                dao.editarSenha(usuario);
                 session.setAttribute("msg", "Senha alterada com sucesso!");
                 rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);

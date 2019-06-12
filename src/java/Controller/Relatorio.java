@@ -5,13 +5,17 @@
  */
 package Controller;
 
+import Dao.ItemVendaDao;
 import Dao.RelatorioDao;
+import Dao.VendaDAO;
+import Model.ItemVendaBean;
 import Model.RelatorioBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,10 +60,16 @@ public class Relatorio extends HttpServlet {
             String dataInicial = request.getParameter("dataInicial");
             String dataFinal = request.getParameter("dataFinal");
             List<RelatorioBean> relatorios = dao.entreDatas(dataInicial, dataFinal);
-            session.setAttribute("datas", dataInicial + " e " + dataFinal);
-            session.setAttribute("entreDatas", relatorios);
-            rd = request.getRequestDispatcher("produtoPorData.jsp");
-            rd.forward(request, response);
+            if (relatorios.size() > 0) {
+                session.setAttribute("datas", dataInicial + " e " + dataFinal);
+                session.setAttribute("entreDatas", relatorios);
+                rd = request.getRequestDispatcher("produtoPorData.jsp");
+                rd.forward(request, response);
+            } else {
+                session.setAttribute("msg", "Nenhuma arrecadação nas datas informadas");
+                rd = request.getRequestDispatcher("administrativa.jsp");
+                rd.forward(request, response);
+            }
         }
     }
 

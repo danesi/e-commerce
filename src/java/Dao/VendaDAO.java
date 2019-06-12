@@ -77,6 +77,8 @@ public class VendaDAO {
             while(rs.next()) {
                 id = rs.getInt("codigo");
             }
+            pstm.close();
+            rs.close();
             return id;
         } catch (Exception e) {
         }

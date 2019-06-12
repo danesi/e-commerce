@@ -45,6 +45,8 @@ public class RelatorioDao {
                 relatorio.setProduto(produto);
                 relatorios.add(relatorio);
             }
+            pstm.close();
+            rs.close();
             return relatorios;
         } catch (Exception e) {
         }
@@ -58,12 +60,13 @@ public class RelatorioDao {
             List<RelatorioBean> relatorios = new ArrayList<>();
             while (rs.next()) {
                 RelatorioBean relatorio = new RelatorioBean();
-                VendaBean venda = new VendaBean();
                 VendaDAO vDao = new VendaDAO();
-                venda = vDao.selecionaPorId(rs.getInt("codigo"));
+                VendaBean venda = vDao.selecionaPorId(rs.getInt("codigo"));
                 relatorio.setVenda(venda);
                 relatorios.add(relatorio);
             }
+            pstm.close();
+            rs.close();
             return relatorios;
         } catch (Exception e) {
             System.err.println("ERROR: " + e.getMessage());

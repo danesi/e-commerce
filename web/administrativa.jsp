@@ -14,6 +14,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <div class="row">
                 <div class="col s10 offset-l1">
@@ -46,10 +47,10 @@
                                                     <div>
                                                         <ul class="collapsible black-text">
                                                             <li>
-                                                                <a href="Relatorio?acao=produtoMaisVendido" class="black-text"><div class="collapsible-header disabled"><i class="material-icons orange-text">shopping_basket</i><b>Produtos mais vendidos</b></div></a>
+                                                                <a href="Relatorio?acao=produtoMaisVendido" class="black-text"><div class="collapsible-header disabled"><i class="material-icons orange-text">shopping_cart</i><b>Produtos mais vendidos</b></div></a>
                                                             </li>
                                                             <li>
-                                                                <div class="collapsible-header"><i class="material-icons orange-text">shopping_basket</i><b>Valor vendido entre datas</b></div>
+                                                                <div class="collapsible-header"><i class="material-icons orange-text">monetization_on</i><b>Valor vendido entre datas</b></div>
                                                                 <div class="collapsible-body">
                                                                     <form action="Relatorio?acao=entreDatas" method="post">
                                                                         <div class="row">
@@ -58,7 +59,7 @@
                                                                                 <label for="dataInicial">Data Inicial</label>
                                                                             </div>
                                                                             <div class="input-field col s5">
-                                                                                <input id="dataFinal" name="dataFinal" type="text" value="10/06/2019" class="validate" required>
+                                                                                <input id="dataFinal" name="dataFinal" type="text" class="validate" required>
                                                                                 <label for="dataFinal">Data Final</label>
                                                                             </div>
                                                                         </div>

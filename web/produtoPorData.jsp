@@ -4,6 +4,7 @@
     Author     : Anesi
 --%>
 
+<%@page import="Model.ItemVendaBean"%>
 <%@page import="Model.RelatorioBean"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.VendaBean"%>
@@ -23,28 +24,35 @@
                 <div class="col s10 offset-l1">
                     <div class="card white">
                         <div class="card-content white-text">
-                            <span class="card-title black-text center">Valor arrecadado entre <%= String.valueOf(session.getAttribute("datas")) %></span>
+                            <span class="card-title black-text center">Valor arrecadado entre <%= String.valueOf(session.getAttribute("datas"))%></span>
                             <br>
                             <div class="divider orange"></div>
                             <br>
                             <div class="row">
                                 <%
                                     double valor = 0;
-                                    System.out.println("Aquiaaaaa");
                                     if (session.getAttribute("entreDatas") != null) {
-                                        System.out.println("Aqui");
                                         List<RelatorioBean> relatorios = (List<RelatorioBean>) session.getAttribute("entreDatas");
                                         if (relatorios.size() > 0) {
-                                            System.out.println("aaaa");
                                             for (RelatorioBean relatorio : relatorios) {
                                                 valor += relatorio.getVenda().getPreco();
                                             }
                                 %>
-                                <h2 class="black-text center"><%= valor %> R$</h2>
+                                <ul class="collapsible black-text col s10 offset-l1">
+                                    <li>
+                                        <div class="collapsible-header"><i class="material-icons orange-text">attach_money</i>Valor total <%= valor%> R$</div>
+                                        <div class="collapsible-body">
+                                            
+                                        </div>
+                                    </li>
+                                </ul>
                                 <%
                                         }
                                     }
                                 %>
+                            </div>
+                            <div class="row center">
+                                <a href="administrativa.jsp" class="waves-effect waves-light btn grey darken-3">Voltar</a>
                             </div>
                         </div>
                     </div>
@@ -54,3 +62,9 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
+<script>
+    var collapsibles = document.querySelectorAll('.collapsible')
+    for (var i = 0; i < collapsibles.length; i++) {
+        M.Collapsible.init(collapsibles[i]);
+    }
+</script>

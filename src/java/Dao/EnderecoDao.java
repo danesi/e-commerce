@@ -60,6 +60,8 @@ public class EnderecoDao {
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 endereco.setUsuario(usuarioDAO.selecionaPorId(rs.getInt("cod_usuario")));
             }
+            pstm.close();
+            rs.close();
             return endereco;
         } catch (Exception e) {
         }

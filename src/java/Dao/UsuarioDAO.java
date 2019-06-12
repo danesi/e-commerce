@@ -165,8 +165,22 @@ public class UsuarioDAO {
                     retorno = true;
                 }
             }
+            pstm.close();
+            rs.close();
         } catch (SQLException e) {
         }
         return retorno;
+    }
+    
+    public void editarSenha(UsuarioBean usuario) {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("update usuarios set senha = ? where codigo = ?");
+            pstm.setString(1, usuario.getSenha());
+            pstm.setInt(2, usuario.getCodigo());
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
     }
 }

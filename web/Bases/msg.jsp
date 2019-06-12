@@ -8,6 +8,5 @@
 </script>
 <%
     }
-
     session.setAttribute("msg", null);
 %>

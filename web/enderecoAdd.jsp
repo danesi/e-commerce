@@ -61,7 +61,10 @@
                                 </div>
                                 <div class="row center">
                                     <a href="login.jsp" class="waves-effect waves-light btn grey darken-3">Cancelar</a>
-                                    <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Cadastrar</button>
+                                    <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Cadastrar</button>                                    
+                                </div>
+                                <div class="row center">
+                                    <a href="login.jsp" class="orange-text">Pular</a>
                                 </div>
                             </form>
                         </div>
