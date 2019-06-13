@@ -78,3 +78,8 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $('#cep').mask('00000-000');
+    });
+</script>

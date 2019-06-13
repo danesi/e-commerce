@@ -22,6 +22,7 @@
                     double precoUnitario = 0;
                     double precoFinal = 0;
                     List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
+                    if (produtos.size() > 0) {
             %>
             <div class="row">
                 <div class="col s10 offset-l1">
@@ -45,8 +46,8 @@
                                         <%
                                             for (ProdutoBean produto : produtos) {
                                                 if (produto.isPromocao()) {
-                                                        precoUnitario = produto.getPrecoPro()* produto.getQuant();
-                                                    } else {
+                                                    precoUnitario = produto.getPrecoPro() * produto.getQuant();
+                                                } else {
                                                     precoUnitario = produto.getPreco() * produto.getQuant();
                                                 }
                                         %>
@@ -91,6 +92,23 @@
                 </div>
             </div> 
             <%
+            } else {
+            %>
+            <div class="row" style="margin-top: 20vh">
+                <div class="col s10 offset-l1">
+                    <div class="card white">
+                        <div class="card-content white-text">
+                            <span class="card-title black-text center">Nenhum produto no carrinho</span>
+                            <br>
+                            <div class="row center" >
+                                <a href="index.jsp" class="waves-effect waves-light btn orange darken-3">Voltar às compras</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%
+                }
             } else {
             %>
             <div class="row" style="margin-top: 20vh">

@@ -41,6 +41,10 @@
                                             </div>
                                         </li>
                                         <li>
+                                            <div class="collapsible-header"><i class="material-icons orange-text">local_atm</i><b>Vendas</b></div>
+                                            <div class="collapsible-body"></div>
+                                        </li>
+                                        <li>
                                             <div class="collapsible-header"><i class="material-icons orange-text">assignment</i><b>Relatórios</b></div>
                                             <div class="collapsible-body">
                                                 <div class="row">
@@ -68,6 +72,9 @@
                                                                         </div>
                                                                     </form>
                                                                 </div>
+                                                            </li>
+                                                            <li>
+                                                                <a href="Relatorio?acao=ClienteMaisComprou" class="black-text"><div class="collapsible-header"><i class="material-icons orange-text">person_outline</i><b>Clientes que mais compraram</b></div></a>
                                                             </li>
                                                         </ul>
                                                     </div>

@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : vendaView
     Created on : 06/06/2019, 18:29:25
     Author     : Anesi
@@ -47,8 +47,9 @@
                                         <tr>
                                             <td><img src="Imagens/<%= venda.getProduto().getImagem()%>" style="max-height: 50px" /></td>
                                             <td><%= venda.getProduto().getNome()%></td>
-                                            <td>R$ <%= venda.getPreco() / venda.getQuantidade() %></td>
+                                            <td>R$ <%= String.format("R$ %,.2f", venda.getPreco() / venda.getQuantidade()).replace(",", ".")%></td>
                                             <td><%= venda.getQuantidade() %></td>
+                                            
                                         </tr>
                                         <%
                                             }

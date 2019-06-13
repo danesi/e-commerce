@@ -7,11 +7,13 @@ package Dao;
 
 import Model.ProdutoBean;
 import Model.RelatorioBean;
+import Model.UsuarioBean;
 import Model.VendaBean;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +74,29 @@ public class RelatorioDao {
             System.err.println("ERROR: " + e.getMessage());
         }
 
+        return null;
+    }
+    
+    public List<RelatorioBean> clienteMaisCompra() {
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("select count(cod_usuario) as quant, cod_usuario from venda group by cod_usuario");
+            ResultSet rs = pstm.executeQuery();
+            List<RelatorioBean> relatorios = new ArrayList<>();
+            while(rs.next()) {
+                RelatorioBean relatorio = new RelatorioBean();
+                VendaBean venda = new VendaBean();
+                UsuarioDAO uDao = new UsuarioDAO();
+                
+                venda.setUsuario(uDao.selecionaPorId(rs.getInt("cod_usuario")));
+                
+                relatorio.setQuantidade(rs.getInt("quant"));
+                relatorio.setVenda(venda);
+                relatorios.add(relatorio);
+            }
+            return relatorios;
+        } catch (SQLException e) {
+            System.out.println("WWWWWWWWWW "+e.getMessage());
+        }
         return null;
     }
 }

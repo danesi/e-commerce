@@ -139,4 +139,9 @@
     for (var i = 0; i < tabs.length; i++) {
         M.Tabs.init(tabs[i]);
     }
+    
+    $(document).ready(function () {
+        $('#cep').mask('00000-000');
+    });
+    
 </script>

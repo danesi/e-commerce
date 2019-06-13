@@ -71,6 +71,19 @@ public class Relatorio extends HttpServlet {
                 rd.forward(request, response);
             }
         }
+        
+        if (acao.equalsIgnoreCase("ClienteMaisComprou")) {
+            List<RelatorioBean> relatorios = dao.clienteMaisCompra();
+            if (relatorios.size() > 0) {
+                session.setAttribute("clienteCompra", relatorios);
+                rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
+                rd.forward(request, response);
+            } else {
+                session.setAttribute("msg", "Nenhuma venda feita");
+                rd = request.getRequestDispatcher("administrativa.jsp");
+                rd.forward(request, response);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

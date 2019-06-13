@@ -14,6 +14,17 @@ public class RelatorioBean {
     private UsuarioBean usuario;
     private VendaBean venda;
     private ItemVendaBean item_venda;
+    private int quantidade;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    
 
     public ProdutoBean getProduto() {
         return produto;

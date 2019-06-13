@@ -3,7 +3,7 @@
 <%@page import="Model.UsuarioBean"%>
 <nav>
     <div class="nav-wrapper grey darken-3">
-        <a href="index.jsp" class="brand-logo">DrinksBars</a>
+        <a href="index.jsp" class="brand-logo">DrinksBar</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <%
                 if (session.getAttribute("usuario") != null) {
