@@ -68,10 +68,13 @@ public class Venda extends HttpServlet {
             List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
             UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
             for (ProdutoBean produto : produtos) {
-                precoTotal += produto.getPreco() * produto.getQuant();
+                if (produto.isPromocao()) {
+                    precoTotal += produto.getPrecoPro() * produto.getQuant();
+                } else {
+                    precoTotal += produto.getPreco() * produto.getQuant();
+                }
             }
             
-            System.out.println(usuario.getNome());
             VendaBean venda = new VendaBean();
             venda.setData(formatador.format(data));
             venda.setPreco(precoTotal);
@@ -79,7 +82,6 @@ public class Venda extends HttpServlet {
              
             dao.cadastrar(venda);
             int id = dao.selecionaUltima();
-            System.out.println(id);
             VendaBean vendaB = dao.selecionaPorId(id);
             session.setAttribute("vendaCadastrada", vendaB);
             rd = request.getRequestDispatcher("ItemVenda?acao=cadastrar");

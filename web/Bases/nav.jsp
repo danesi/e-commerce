@@ -7,8 +7,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <%
                 if (session.getAttribute("usuario") != null) {
-                    UsuarioBean usuario = new UsuarioBean();
-                    usuario = (UsuarioBean) session.getAttribute("usuario");
+                    UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
             %>
             <li><a href="Usuario?acao=verUsuario"><%= usuario.getNome()%></a></li>
                 <%
@@ -21,7 +20,7 @@
             <li><a href="carrinho.jsp">Carrinho
                     <%
                         if (session.getAttribute("carrinho") != null) {
-                            List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("carrinho");
+                            List<ProdutoBean>produtos  = (List<ProdutoBean>) session.getAttribute("carrinho");
                             if (produtos.size() > 0) {
                     %>
                     <span class="new badge orange darken-3" data-badge-caption="
@@ -32,7 +31,7 @@
                                   out.print("itens");
                               }
                           %>
-                          "><%= produtos.size()%></span>
+                          "><%= produtos.size() %></span>
                     <%
                             }
                         }

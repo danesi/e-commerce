@@ -16,6 +16,8 @@ public class ProdutoBean {
   private double preco;
   private int quant;
   private int quant_estoque;
+  private boolean promocao;
+  private double precoPro;
 
     public int getCodigo() {
         return codigo;
@@ -64,6 +66,22 @@ public class ProdutoBean {
     public void setQuant_estoque(int quant_estoque) {
         this.quant_estoque = quant_estoque;
     }
+
+    public boolean isPromocao() {
+        return promocao;
+    }
+
+    public void setPromocao(boolean promocao) {
+        this.promocao = promocao;
+    }
+
+    public double getPrecoPro() {
+        return precoPro;
+    }
+
+    public void setPrecoPro(double precoPro) {
+        this.precoPro = precoPro;
+    }
   
-  
+
 }

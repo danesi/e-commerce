@@ -19,8 +19,7 @@
         <main>
             <%
                 if (session.getAttribute("produto") != null) {
-                    ProdutoBean produto = new ProdutoBean();
-                    produto = (ProdutoBean) session.getAttribute("produto");
+                    ProdutoBean produto = (ProdutoBean) session.getAttribute("produto");
             %> 
             <div class="row">
                 <div class="col s10 offset-l1">
@@ -36,14 +35,24 @@
                                 <div class="row col s4 offset-l1">
                                     <h5 class="black-text"><%= produto.getNome()%></h5>
                                     <br>
-                                    <h6 class="black-text">Preco unitario: <%= produto.getPreco()%> R$</h6>
+                                    <%
+                                        if (produto.isPromocao()) {
+                                    %>
+                                    <h6 class="black-text"> Preco promocional: <%= produto.getPrecoPro()%> R$</h6>
+                                    <%
+                                    } else {
+                                    %>
+                                    <h6 class="black-text"> Preco unitario: <%= produto.getPreco()%> R$</h6>
+                                    <%
+                                        }
+                                    %>
                                     <br>
                                     <form action="Produto?acao=addCarrinho&id=<%= produto.getCodigo()%>" method="post" >
                                         <div class="row col s12">
                                             <div class="row input-field">
                                                 <input id="quant" value="1" name="quant" type="number" min="1" max="<%= produto.getQuant_estoque()%>" required class="validate">
                                                 <label for="quant">Quantidade</label>
-                                                <small class="black-text">Quantidade de estoque: <%= produto.getQuant_estoque() %></small>
+                                                <small class="black-text">Quantidade de estoque: <%= produto.getQuant_estoque()%></small>
                                             </div>
                                         </div>
                                         <div class="row center">

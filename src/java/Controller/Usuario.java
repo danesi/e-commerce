@@ -169,7 +169,6 @@ public class Usuario extends HttpServlet {
             if (request.getParameter("senha1").equals(request.getParameter("senha2"))) {
                 UsuarioBean usuario = (UsuarioBean) session.getAttribute("rs");
                 usuario.setSenha(request.getParameter("senha1"));
-                System.out.println(request.getParameter("senha1"));
                 dao.editarSenha(usuario);
                 session.setAttribute("msg", "Senha alterada com sucesso!");
                 rd = request.getRequestDispatcher("login.jsp");

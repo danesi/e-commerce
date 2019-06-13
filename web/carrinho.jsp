@@ -44,24 +44,40 @@
                                     <tbody>
                                         <%
                                             for (ProdutoBean produto : produtos) {
-                                                precoUnitario = produto.getPreco() * produto.getQuant();
+                                                if (produto.isPromocao()) {
+                                                        precoUnitario = produto.getPrecoPro()* produto.getQuant();
+                                                    } else {
+                                                    precoUnitario = produto.getPreco() * produto.getQuant();
+                                                }
                                         %>
                                         <tr>
                                             <td><%= produto.getNome()%></td>
                                             <td><%= produto.getQuant()%></td>
-                                            <td><%= produto.getPreco()%> R$</td>
-                                            <td><%= String.format("R$ %,.2f", precoUnitario).replace(",", ".") %> R$</td>
+                                            <td>
+                                                <%
+                                                    if (produto.isPromocao()) {
+                                                        out.print("R$ " + produto.getPrecoPro());
+                                                    } else {
+                                                        out.print("R$ " + produto.getPreco());
+                                                    }
+                                                %>
+                                            </td>
+                                            <td><%= String.format("R$ %,.2f", precoUnitario).replace(",", ".")%> R$</td>
                                             <td><a href="Produto?acao=removeCarrinho&id=<%= produto.getCodigo()%>"<i class="material-icons black-text">delete</i></a></td>
                                         </tr>
                                         <%
-                                                precoFinal += produto.getPreco() * produto.getQuant();
+                                                if (produto.isPromocao()) {
+                                                    precoFinal += produto.getPrecoPro() * produto.getQuant();
+                                                } else {
+                                                    precoFinal += produto.getPreco() * produto.getQuant();
+                                                }
                                             }
                                         %>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row center">
-                                
+
                             </div>
                             <br>
                             <div class="row center">

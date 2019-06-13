@@ -42,7 +42,26 @@
                                     <li>
                                         <div class="collapsible-header"><i class="material-icons orange-text">attach_money</i>Valor total <%= valor%> R$</div>
                                         <div class="collapsible-body">
-                                            
+                                            <table class="striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Data</th>
+                                                        <th>Valor total da venda</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%
+                                                        for (RelatorioBean relatorio : relatorios) {
+                                                    %>
+                                                    <tr>
+                                                        <td><%= relatorio.getVenda().getData()%></td>
+                                                        <td><%= relatorio.getVenda().getPreco()%></td>
+                                                    </tr>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </li>
                                 </ul>

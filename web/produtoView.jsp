@@ -39,7 +39,8 @@
                                     <tr>
                                         <th>Imagem</th>
                                         <th>Nome</th>
-                                        <th>Preço</th>
+                                        <th>Preço</th>                                                                                                                        
+                                        <th>Preco promocional</th>                                                                                                                        
                                         <th>Quantidade no estoque</th>
                                         <th>Ações</th>
                                     </tr>
@@ -51,12 +52,20 @@
                                     <tr>
                                         <td><img src="Imagens/<%= produto.getImagem()%>" style="max-height: 50px" /></td>
                                         <td><%= produto.getNome()%></td>
-                                        <td><%= produto.getPreco()%> R$</td>
+                                        <td>R$ <%= produto.getPreco()%></td>
+                                        <td>
+                                            <%
+                                                if (produto.isPromocao()) {
+                                                    out.print("R$ "+ produto.getPrecoPro());
+                                                } else {
+                                                    out.print("-");
+                                                }
+                                            %>
+                                        </td>
                                         <td><%= produto.getQuant_estoque()%></td>
 
                                         <td>
                                             <a href="Produto?acao=editarProduto&id=<%= produto.getCodigo()%>"><i class="material-icons black-text">edit</i></a>
-                                            <a href="Produto?acao=deletarProduto&id=<%= produto.getCodigo()%>"><i class="material-icons black-text">delete</i></a>
                                         </td>
                                     </tr>
                                     <%

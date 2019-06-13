@@ -31,7 +31,7 @@ public class ProdutoDAO {
 
     public List<ProdutoBean> selecionaTodos() {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by codigo");
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by promocao desc");
             ResultSet rs = pstm.executeQuery();
             List<ProdutoBean> produtos = new ArrayList<>();
             while (rs.next()) {
@@ -42,6 +42,8 @@ public class ProdutoDAO {
                     produto.setImagem(rs.getString("imagem"));
                     produto.setPreco(rs.getDouble("preco"));
                     produto.setQuant_estoque(rs.getInt("quant_estoque"));
+                    produto.setPromocao(rs.getBoolean("promocao"));
+                    produto.setPrecoPro(rs.getDouble("precopro"));
                     produtos.add(produto);
                 }
 
@@ -67,6 +69,8 @@ public class ProdutoDAO {
                 produto.setImagem(rs.getString("imagem"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setQuant_estoque(rs.getInt("quant_estoque"));
+                produto.setPromocao(rs.getBoolean("promocao"));
+                produto.setPrecoPro(rs.getDouble("precoPro"));
                 produtos.add(produto);
             }
             pstm.close();
@@ -80,7 +84,7 @@ public class ProdutoDAO {
 
     public void inserir(ProdutoBean produto) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("insert into produtos values (default, ?, ?, ?, ?)");
+            PreparedStatement pstm = conexao.prepareStatement("insert into produtos values (default, ?, ?, ?, ?, default, default)");
             pstm.setString(1, produto.getNome());
             pstm.setString(2, produto.getImagem());
             pstm.setDouble(3, produto.getPreco());
@@ -104,6 +108,8 @@ public class ProdutoDAO {
                 produto.setImagem(rs.getString("imagem"));
                 produto.setPreco(rs.getDouble("preco"));
                 produto.setQuant_estoque(rs.getInt("quant_estoque"));
+                produto.setPromocao(rs.getBoolean("promocao"));
+                produto.setPrecoPro(rs.getDouble("precoPro"));
             }
             pstm.close();
             rs.close();
@@ -113,27 +119,17 @@ public class ProdutoDAO {
         return null;
     }
 
-    public void removerProduto(int id) {
-        try {
-            PreparedStatement pstm = conexao.prepareStatement("delete from produtos where codigo = ?");
-            pstm.setInt(1, id);
-            ResultSet rs = pstm.executeQuery();
-            pstm.close();
-            rs.close();
-        } catch (SQLException e) {
-        }
-    }
-
     public void editar(ProdutoBean produto) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("update produtos set nome = ?, imagem = ?, preco = ?, quant_estoque = ? where codigo = ?");
+            PreparedStatement pstm = conexao.prepareStatement("update produtos set nome = ?, imagem = ?, preco = ?, quant_estoque = ?, promocao = ?, precoPro = ? where codigo = ?");
             pstm.setString(1, produto.getNome());
             pstm.setString(2, produto.getImagem());
             pstm.setDouble(3, produto.getPreco());
             pstm.setInt(4, produto.getQuant_estoque());
-            pstm.setInt(5, produto.getCodigo());
+            pstm.setBoolean(5, produto.isPromocao());
+            pstm.setDouble(6, produto.getPrecoPro());
+            pstm.setInt(7, produto.getCodigo());
             ResultSet rs = pstm.executeQuery();
-            System.out.println("veio aqui");
             pstm.close();
             rs.close();
         } catch (SQLException e) {
@@ -142,13 +138,14 @@ public class ProdutoDAO {
 
     public void editarSemImagem(ProdutoBean produto) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("update produtos set nome = ?, preco = ?, quant_estoque = ? where codigo = ?");
+            PreparedStatement pstm = conexao.prepareStatement("update produtos set nome = ?, preco = ?, quant_estoque = ?, promocao = ?, precoPro = ? where codigo = ?");
             pstm.setString(1, produto.getNome());
             pstm.setDouble(2, produto.getPreco());
             pstm.setInt(3, produto.getQuant_estoque());
-            pstm.setInt(4, produto.getCodigo());
+            pstm.setBoolean(4, produto.isPromocao());
+            pstm.setDouble(5, produto.getPrecoPro());
+            pstm.setInt(6, produto.getCodigo());
             ResultSet rs = pstm.executeQuery();
-            System.out.println("veio aqui");
             pstm.close();
             rs.close();
         } catch (SQLException e) {

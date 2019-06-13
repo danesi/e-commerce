@@ -40,12 +40,26 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s5 offset-l1">
-                                            <input id="preco" name="preco" type="text" value="<%= produto.getPreco()%>">
+                                            <input id="preco" name="preco" type="number" value="<%= produto.getPreco()%>" step="0.01">
                                             <label for="preco">Preco</label>
+                                            <span class="helper-text">* Utilize a virgula como separador</span>
                                         </div>
                                         <div class="input-field col s5">
                                             <input id="quant_estoque" type="text" name="quant_estoque" value="<%= produto.getQuant_estoque()%>">
                                             <label for="quant_estoque">Quantidade em estoque</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col s5 offset-l1" style="margin-top: 3vw">
+                                            <label>
+                                                <input type="checkbox" class="filled-in" name="promocao" <%= produto.isPromocao() == true ? "checked='checked'" : ""%> />
+                                                <span>Está em promoção</span>
+                                            </label>
+                                        </p>
+                                        <div class="input-field col s5">
+                                            <input id="precoPro" name="precoPro" type="number" value="<%= produto.getPrecoPro()%>" step="0.01">
+                                            <label for="precoPro">Preco promocional</label>
+                                            <span class="helper-text">* Utilize a virgula como separador</span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -73,6 +87,3 @@
         <jsp:include page="Bases/footer.jsp" />
     </body>
 </html>
-<script>
-    
-</script>
