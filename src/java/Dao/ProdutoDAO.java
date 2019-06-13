@@ -31,7 +31,7 @@ public class ProdutoDAO {
 
     public List<ProdutoBean> selecionaTodos() {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by promocao desc");
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos order by promocao desc, codigo");
             ResultSet rs = pstm.executeQuery();
             List<ProdutoBean> produtos = new ArrayList<>();
             while (rs.next()) {

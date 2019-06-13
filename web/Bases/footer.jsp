@@ -1,8 +1,7 @@
 <footer class="page-footer grey darken-3">
     <div class="footer-copyright">
-        <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        <div class="container center">
+            © 2019 Desenvolvido por Daniel Anesi e Enrique Pappis
         </div>
     </div>
 </footer>

@@ -48,7 +48,7 @@ public class VendaDAO {
     
     public List<VendaBean> selecionaPorUsuario(int id) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from venda where cod_usuario = ?");
+            PreparedStatement pstm = conexao.prepareStatement("select * from venda where cod_usuario = ? order by data desc");
             pstm.setInt(1, id);
             ResultSet rs = pstm.executeQuery();
             List<VendaBean> vendas = new ArrayList<>();

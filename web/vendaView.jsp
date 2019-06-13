@@ -47,8 +47,8 @@
                                         <tr>
                                             <td><img src="Imagens/<%= venda.getProduto().getImagem()%>" style="max-height: 50px" /></td>
                                             <td><%= venda.getProduto().getNome()%></td>
-                                            <td><%= venda.getProduto().getPreco()%></td>
-                                            <td><%= venda.getQuantidade()%></td>
+                                            <td>R$ <%= venda.getPreco() / venda.getQuantidade() %></td>
+                                            <td><%= venda.getQuantidade() %></td>
                                         </tr>
                                         <%
                                             }
