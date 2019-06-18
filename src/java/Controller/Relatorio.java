@@ -80,17 +80,13 @@ public class Relatorio extends HttpServlet {
 
         if (acao.equalsIgnoreCase("ClienteMaisComprou")) {
             List<RelatorioBean> relatorios = dao.clienteMaisCompra();
-            for (RelatorioBean r : relatorios) {
-                System.out.println(r.getVenda().getUsuario().getNome());
-                System.out.println(r.getQuantidade());
+            if (relatorios.size() > 0) {
+                session.setAttribute("clienteCompra", relatorios);
+                rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
+                rd.forward(request, response);
+            } else {
+                System.out.println("aaaADSD");
             }
-//            if (relatorios.size() > 0) {
-//                session.setAttribute("clienteCompra", relatorios);
-//                rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
-//                rd.forward(request, response);
-//            } else {
-//                System.out.println("aaaADSD");
-//            }
 
         }
     }

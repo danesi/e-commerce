@@ -4,6 +4,7 @@
     Author     : Anesi
 --%>
 
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.RelatorioBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,7 +30,7 @@
                                 if (session.getAttribute("clienteCompra") != null) {
                                     List<RelatorioBean> relatorios = (List<RelatorioBean>) session.getAttribute("clienteCompra");
                             %>
-                            <table>
+                            <table class="black-text">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -38,12 +39,12 @@
                                 </thead>
 
                                 <tbody>
-                                    <%
-                                        for (RelatorioBean relatorio : relatorios) {
+                                    <%                                        
+                                        for(RelatorioBean relatorio : relatorios){
                                     %>
                                     <tr>
-                                        <td><%= relatorio.getUsuario().getNome() %></td>
-                                        <td><%= relatorio.getQuantidade() %></td>
+                                        <td><%= relatorio.getVenda().getUsuario().getNome()%></td>
+                                        <td><%= relatorio.getQuantidade()%></td>
                                     </tr>
                                     <%
                                         }
