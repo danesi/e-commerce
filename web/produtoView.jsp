@@ -17,6 +17,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <%
                 if (session.getAttribute("usuario") != null) {
@@ -30,6 +31,19 @@
                             <span class="card-title black-text center">Todos os produtos</span>
                             <br>
                             <div class="divider orange"></div>
+                            <form action="Produto?acao=buscarProduto" method="post">
+                                <div class="row">
+                                    <div class="input-field col s10 offset-l1">
+                                        <i class="material-icons prefix black-text">search</i>
+                                        <input id="nome" name="nome" type="text" placeholder="Digite o nome do produto">
+                                        <label for="nome">Buscar produto</label>
+                                    </div>
+                                </div>
+                                <div class="row center">
+                                    <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Buscar
+                                    </button>
+                                </div>
+                            </form>
                             <%
                                 if (session.getAttribute("produtos") != null) {
                                     List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("produtos");
@@ -56,7 +70,7 @@
                                         <td>
                                             <%
                                                 if (produto.isPromocao()) {
-                                                    out.print("R$ "+ produto.getPrecoPro());
+                                                    out.print("R$ " + produto.getPrecoPro());
                                                 } else {
                                                     out.print("-");
                                                 }

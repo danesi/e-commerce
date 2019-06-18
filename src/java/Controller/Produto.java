@@ -199,13 +199,36 @@ public class Produto extends HttpServlet {
             rd = request.getRequestDispatcher("produtoView.jsp");
             rd.forward(request, response);
         }
-        
+
         if (acao.equalsIgnoreCase("editarProduto")) {
             int id = Integer.parseInt(request.getParameter("id"));
             ProdutoBean produto = dao.selecionaPorId(id);
             session.setAttribute("produtoEditar", produto);
             rd = request.getRequestDispatcher("produtoEdit.jsp");
             rd.forward(request, response);
+        }
+
+        if (acao.equalsIgnoreCase("buscarProduto")) {
+            String nome = request.getParameter("nome");
+            if (!nome.equals("")) {
+                ProdutoBean produto = dao.selecionaPorNome(nome);
+                if (produto.equals(null)) {
+                    List<ProdutoBean> produtos = new ArrayList<>();
+                    produtos.add(produto);
+                    session.setAttribute("produtos", produtos);
+                    rd = request.getRequestDispatcher("produtoView.jsp");
+                    rd.forward(request, response);
+                } else {
+                    session.setAttribute("msg", "Nenhum produto encontrado com esse nome");
+                    rd = request.getRequestDispatcher("Produto?acao=verProdutos");
+                    rd.forward(request, response);
+                }
+
+            } else {
+                rd = request.getRequestDispatcher("Produto?acao=verProdutos");
+                rd.forward(request, response);
+            }
+
         }
 
     }
@@ -225,11 +248,11 @@ public class Produto extends HttpServlet {
             case "quant_estoque":
                 product.setQuant_estoque(Integer.parseInt(value));
                 break;
-                
+
             case "promocao":
                 product.setPromocao(true);
                 break;
-                
+
             case "precoPro":
                 product.setPrecoPro(Double.parseDouble(value));
         }
