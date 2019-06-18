@@ -68,6 +68,7 @@ public class Produto extends HttpServlet {
                 produto.setQuant(quantidade);
                 carrinho.add(produto);
                 session.setAttribute("carrinho", carrinho);
+                session.setAttribute("msg", produto.getNome() + " adicionado ao carrinho");
                 rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
 

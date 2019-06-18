@@ -35,6 +35,7 @@
                                 <table class="black-text">
                                     <thead>
                                         <tr>
+                                            <th>Imagem</th>
                                             <th>Produto</th>
                                             <th>Quantidade</th>
                                             <th>Preço unitario</th>
@@ -52,6 +53,7 @@
                                                 }
                                         %>
                                         <tr>
+                                            <td><img src="Imagens/<%= produto.getImagem()%>" style="max-height: 50px" /></td>
                                             <td><%= produto.getNome()%></td>
                                             <td><%= produto.getQuant()%></td>
                                             <td>

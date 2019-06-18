@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,29 +61,37 @@ public class Relatorio extends HttpServlet {
             String dataInicial = request.getParameter("dataInicial");
             String dataFinal = request.getParameter("dataFinal");
             List<RelatorioBean> relatorios = dao.entreDatas(dataInicial, dataFinal);
-            if (relatorios.size() > 0) {
-                session.setAttribute("datas", dataInicial + " e " + dataFinal);
-                session.setAttribute("entreDatas", relatorios);
-                rd = request.getRequestDispatcher("produtoPorData.jsp");
-                rd.forward(request, response);
-            } else {
-                session.setAttribute("msg", "Nenhuma arrecadação nas datas informadas");
-                rd = request.getRequestDispatcher("administrativa.jsp");
-                rd.forward(request, response);
+            try {
+                if (relatorios == null) {
+                    session.setAttribute("msg", "Nenhuma arrecadação nas datas informadas");
+                    rd = request.getRequestDispatcher("administrativa.jsp");
+                    rd.forward(request, response);
+                } else {
+                    session.setAttribute("datas", dataInicial + " e " + dataFinal);
+                    session.setAttribute("entreDatas", relatorios);
+                    rd = request.getRequestDispatcher("produtoPorData.jsp");
+                    rd.forward(request, response);
+                }
+            } catch (IOException | ServletException e) {
+
             }
+
         }
-        
+
         if (acao.equalsIgnoreCase("ClienteMaisComprou")) {
             List<RelatorioBean> relatorios = dao.clienteMaisCompra();
-            if (relatorios.size() > 0) {
-                session.setAttribute("clienteCompra", relatorios);
-                rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
-                rd.forward(request, response);
-            } else {
-                session.setAttribute("msg", "Nenhuma venda feita");
-                rd = request.getRequestDispatcher("administrativa.jsp");
-                rd.forward(request, response);
+            for (RelatorioBean r : relatorios) {
+                System.out.println(r.getVenda().getUsuario().getNome());
+                System.out.println(r.getQuantidade());
             }
+//            if (relatorios.size() > 0) {
+//                session.setAttribute("clienteCompra", relatorios);
+//                rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
+//                rd.forward(request, response);
+//            } else {
+//                System.out.println("aaaADSD");
+//            }
+
         }
     }
 

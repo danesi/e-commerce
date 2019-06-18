@@ -70,11 +70,9 @@ public class RelatorioDao {
             pstm.close();
             rs.close();
             return relatorios;
-        } catch (Exception e) {
-            System.err.println("ERROR: " + e.getMessage());
+        } catch (SQLException e) {
+            return null;
         }
-
-        return null;
     }
     
     public List<RelatorioBean> clienteMaisCompra() {
