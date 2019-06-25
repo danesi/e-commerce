@@ -30,27 +30,34 @@
                                 if (session.getAttribute("clienteCompra") != null) {
                                     List<RelatorioBean> relatorios = (List<RelatorioBean>) session.getAttribute("clienteCompra");
                             %>
-                            <table class="black-text">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Compras feitas</th>
-                                    </tr>
-                                </thead>
+                            <div class="row">
+                                <div class="col s10 offset-l1">
+                                    <table class="black-text responsive-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Compras feitas</th>
+                                            </tr>
+                                        </thead>
 
-                                <tbody>
-                                    <%                                        
-                                        for(RelatorioBean relatorio : relatorios){
-                                    %>
-                                    <tr>
-                                        <td><%= relatorio.getVenda().getUsuario().getNome()%></td>
-                                        <td><%= relatorio.getQuantidade()%></td>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>
-                                </tbody>
-                            </table>
+                                        <tbody>
+                                            <%
+                                                for (RelatorioBean relatorio : relatorios) {
+                                            %>
+                                            <tr>
+                                                <td><%= relatorio.getVenda().getUsuario().getNome()%></td>
+                                                <td><%= relatorio.getQuantidade()%></td>
+                                            </tr>
+                                            <%
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row center">
+                                <a href="administrativa.jsp" class="waves-effect waves-light btn grey darken-3">Voltar</a>
+                            </div>
                             <%
                                 }
                             %>

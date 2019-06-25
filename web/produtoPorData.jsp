@@ -66,6 +66,12 @@
                                     </li>
                                 </ul>
                                 <%
+                                } else {
+                                %>
+                                <div class="row center">
+                                    <h5 class="black-text">Nenhum registro encontrado nesta data</h5>
+                                </div>
+                                <%
                                         }
                                     }
                                 %>

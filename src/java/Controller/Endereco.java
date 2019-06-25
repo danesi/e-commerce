@@ -37,9 +37,9 @@ public class Endereco extends HttpServlet {
         HttpSession session = request.getSession();
         String acao = request.getParameter("acao");
         RequestDispatcher rd = null;
-        
+
         EnderecoDao dao = new EnderecoDao();
-        
+
         if (acao.equalsIgnoreCase("cadastrar")) {
             EnderecoBean endereco = new EnderecoBean();
             endereco.setEndereco(request.getParameter("endereco"));
@@ -50,15 +50,16 @@ public class Endereco extends HttpServlet {
             endereco.setCidade(request.getParameter("cidade"));
             UsuarioBean usuario = (UsuarioBean) session.getAttribute("u_cadastrado");
             endereco.setUsuario(usuario);
-            
+
             dao.cadastrar(endereco);
-            
+
             session.setAttribute("msg", "Endereço cadastrado");
             rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
         }
-        
+
         if (acao.equalsIgnoreCase("cadastrarDepois")) {
+            boolean aux = Boolean.parseBoolean(request.getParameter("aux"));
             EnderecoBean endereco = new EnderecoBean();
             endereco.setEndereco(request.getParameter("endereco"));
             endereco.setCep(request.getParameter("cep"));
@@ -68,19 +69,26 @@ public class Endereco extends HttpServlet {
             endereco.setCidade(request.getParameter("cidade"));
             UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
             endereco.setUsuario(usuario);
-            
+
             dao.cadastrar(endereco);
-            session.setAttribute("endereco", endereco);
-            session.setAttribute("msg", "Endereço cadastrado");
-            rd = request.getRequestDispatcher("vendaAdd.jsp");
-            rd.forward(request, response);
+            if (aux) {
+                session.setAttribute("endereco", endereco);
+                session.setAttribute("msg", "Endereço cadastrado");
+                rd = request.getRequestDispatcher("Usuario?acao=verUsuario");
+                rd.forward(request, response);
+            } else {
+                session.setAttribute("endereco", endereco);
+                session.setAttribute("msg", "Endereço cadastrado");
+                rd = request.getRequestDispatcher("vendaAdd.jsp");
+                rd.forward(request, response);
+            }
         }
-        
+
         if (acao.equalsIgnoreCase("editarDaVenda")) {
             rd = request.getRequestDispatcher("enderecoEdit.jsp");
             rd.forward(request, response);
         }
-        
+
         if (acao.equalsIgnoreCase("editarParaVenda")) {
             EnderecoBean endereco = new EnderecoBean();
             endereco.setEndereco(request.getParameter("endereco"));
@@ -89,13 +97,35 @@ public class Endereco extends HttpServlet {
             endereco.setComplemento(request.getParameter("complemento"));
             endereco.setEstado(request.getParameter("estado"));
             endereco.setCidade(request.getParameter("cidade"));
+
             UsuarioBean usuario = (UsuarioBean) session.getAttribute("usuario");
-            
+
             endereco.setUsuario(usuario);
             dao.editar(endereco);
             EnderecoBean e = dao.selecionaPorIdUsuario(usuario.getCodigo());
             session.setAttribute("endereco", e);
-            rd = request.getRequestDispatcher("vendaAdd.jsp");
+            if (session.getAttribute("aux") != null) {
+                session.setAttribute("aux", null);
+                session.setAttribute("msg", "Endereco atualizado");
+                rd = request.getRequestDispatcher("Usuario?acao=verUsuario");
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher("vendaAdd.jsp");
+                rd.forward(request, response);
+            }
+        }
+
+        if (acao.equalsIgnoreCase("excluir")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            dao.excluir(id);
+            session.setAttribute("msg", "Endereco excluido com sucesso");
+            rd = request.getRequestDispatcher("Usuario?acao=verUsuario");
+            rd.forward(request, response);
+        }
+
+        if (acao.equalsIgnoreCase("edit")) {
+            session.setAttribute("aux", true);
+            rd = request.getRequestDispatcher("enderecoEdit.jsp");
             rd.forward(request, response);
         }
     }

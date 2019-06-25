@@ -55,6 +55,7 @@ public class EnderecoDao {
             ResultSet rs = pstm.executeQuery();
             EnderecoBean endereco = new EnderecoBean();
             while(rs.next()) {
+                endereco.setCodigo(rs.getInt("codigo"));
                 endereco.setEndereco(rs.getString("endereco"));
                 endereco.setCep(rs.getString("cep"));
                 endereco.setNum_casa(rs.getInt("num_casa"));
@@ -86,6 +87,17 @@ public class EnderecoDao {
             pstm.close();
             rs.close();
             
+        } catch (SQLException e) {
+        }
+    }
+    
+    public void excluir(int id){
+        try {
+            PreparedStatement pstm = conexao.prepareStatement("delete from endereco where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            pstm.close();
+            rs.close();
         } catch (SQLException e) {
         }
     }

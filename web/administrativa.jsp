@@ -40,10 +40,10 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li>
+<!--                                        <li>
                                             <div class="collapsible-header"><i class="material-icons orange-text">local_atm</i><b>Vendas</b></div>
                                             <div class="collapsible-body"></div>
-                                        </li>
+                                        </li>-->
                                         <li>
                                             <div class="collapsible-header"><i class="material-icons orange-text">assignment</i><b>Relatórios</b></div>
                                             <div class="collapsible-body">

@@ -212,7 +212,7 @@ public class Produto extends HttpServlet {
             String nome = request.getParameter("nome");
             if (!nome.equals("")) {
                 ProdutoBean produto = dao.selecionaPorNome(nome);
-                if (produto.equals(null)) {
+                if (produto.getNome() != null) {
                     List<ProdutoBean> produtos = new ArrayList<>();
                     produtos.add(produto);
                     session.setAttribute("produtos", produtos);

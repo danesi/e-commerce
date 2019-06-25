@@ -18,6 +18,7 @@
     </head>
     <body class="grey lighten-1">
         <jsp:include page="Bases/nav.jsp" />
+        <jsp:include page="Bases/msg.jsp" />
         <main>
             <%
                 if (session.getAttribute("usuario") != null) {
@@ -69,6 +70,7 @@
                                             <div class="collapsible-body">
                                                 <%
                                                     EnderecoBean endereco = (EnderecoBean) session.getAttribute("endereco");
+                                                    if (endereco.getEndereco() != null) {
                                                 %>
                                                 <table>
                                                     <thead>
@@ -79,6 +81,7 @@
                                                             <th>Complemento</th>
                                                             <th>Estado</th>
                                                             <th>Cidade</th>
+                                                            <th>Ação</th>
                                                         </tr>
                                                     </thead>
 
@@ -90,13 +93,27 @@
                                                             <td><%= endereco.getComplemento()%></td>
                                                             <td><%= endereco.getEstado()%></td>
                                                             <td><%= endereco.getCidade()%></td>
+                                                            <td>
+                                                                <a href="Endereco?acao=excluir&id=<%= endereco.getCodigo()%>"><i class="material-icons black-text">delete</i>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <div class="row center">
                                                     <br>
-                                                    <a href="enderecoEdit.jsp" class="waves-effect waves-light btn orange darken-3">Editar</a>
+                                                    <a href="Endereco?acao=edit" class="waves-effect waves-light btn orange darken-3">Editar</a>
                                                 </div>
+                                                <%
+                                                } else {
+                                                %>
+                                                <div class="row center">
+                                                    <h5 class="black-text">Nenhum endereco encontrado</h5>
+                                                    <br>
+                                                    <a href="enderecoAdd.jsp" class="waves-effect waves-light btn orange darken-3">Adicionar</a>
+                                                </div>
+                                                <%
+                                                    }
+                                                %>
                                             </div>
                                         </li>
                                         <li>
@@ -104,6 +121,7 @@
                                             <div class="collapsible-body">
                                                 <%
                                                     List<VendaBean> vendas = (List<VendaBean>) session.getAttribute("vendas");
+                                                    if (vendas.size() > 0) {
                                                 %>
                                                 <table>
                                                     <thead>
@@ -121,13 +139,24 @@
                                                         <tr>
                                                             <td><%= venda.getData()%></td>
                                                             <td><%= venda.getPreco()%> R$</td>
-                                                            <td><a href="Venda?acao=verVenda&id=<%= venda.getCodigo() %>" ><i class="material-icons black-text">zoom_in</i></a></td>
+                                                            <td><a href="Venda?acao=verVenda&id=<%= venda.getCodigo()%>" ><i class="material-icons black-text">zoom_in</i></a></td>
                                                         </tr>
                                                         <%
                                                             }
                                                         %>
                                                     </tbody>
                                                 </table>
+                                                <%
+                                                } else {
+                                                %>
+                                                <div class="row center">
+                                                    <h5 class="black-text">Nenhum compra feita</h5>
+                                                    <br>
+                                                    <a href="index.jsp" class="waves-effect waves-light btn orange darken-3">Comprar</a>
+                                                </div>
+                                                <%
+                                                    }
+                                                %>
                                             </div>
                                         </li>
                                     </ul>

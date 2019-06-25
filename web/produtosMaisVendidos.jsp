@@ -30,6 +30,7 @@
                                 <%
                                     if (session.getAttribute("produtoMaisVendido") != null) {
                                         List<RelatorioBean> relatorios = (List<RelatorioBean>) session.getAttribute("produtoMaisVendido");
+                                        if (relatorios.size() > 0) {
                                 %>
                                 <table class="black-text col s10 offset-l1">
                                     <thead>
@@ -57,6 +58,13 @@
                                 </table>
 
                                 <%
+                                } else {
+                                %>
+                                <div class="row center">
+                                    <h5 class="black-text">Nenhum produto encontrado</h5>
+                                </div>
+                                <%
+                                    }
                                 } else {
                                 %>
                                 <br>

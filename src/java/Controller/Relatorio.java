@@ -85,7 +85,9 @@ public class Relatorio extends HttpServlet {
                 rd = request.getRequestDispatcher("clienteQueMaisCompra.jsp");
                 rd.forward(request, response);
             } else {
-                System.out.println("aaaADSD");
+                session.setAttribute("msg", "Nenhum registro emcontrado");
+                rd = request.getRequestDispatcher("administrativa.jsp");
+                rd.forward(request, response);
             }
 
         }

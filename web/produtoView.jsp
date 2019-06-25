@@ -31,6 +31,7 @@
                             <span class="card-title black-text center">Todos os produtos</span>
                             <br>
                             <div class="divider orange"></div>
+                            <br>
                             <form action="Produto?acao=buscarProduto" method="post">
                                 <div class="row">
                                     <div class="input-field col s10 offset-l1">
