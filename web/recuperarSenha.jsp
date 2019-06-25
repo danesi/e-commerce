@@ -39,6 +39,7 @@
                                         </div>
                                     </div>
                                     <div class="row center">
+                                        <a href="login.jsp" class="waves-effect waves-light btn grey darken-3">Cancelar</a>
                                         <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Continuar</button>
                                     </div>
                                 </form>

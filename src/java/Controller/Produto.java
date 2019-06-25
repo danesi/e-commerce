@@ -263,6 +263,7 @@ public class Produto extends HttpServlet {
     private ProdutoBean processUploadedFile(FileItem item, ProdutoBean product) {
         try {
             File uploadDir = new File(getServletContext().getRealPath("/") + "/Imagens");
+            System.out.println(uploadDir);
             File file = File.createTempFile("img", ".png", uploadDir);
             item.write(file);
             product.setImagem(file.getName());
