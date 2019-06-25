@@ -19,12 +19,29 @@
         <jsp:include page="Bases/nav.jsp" />
         <jsp:include page="Bases/msg.jsp" />
         <main>
+            <br>
             <div class="container col s10 offset-l1">
+                <div class="row">
+                    <div class="card z-depth-3">
+                        <form action="Produto?acao=filtro" method="post">
+                            <div class="row">
+                                <div class="input-field col s8 offset-l1">
+                                    <i class="material-icons prefix black-text">search</i>
+                                    <input id="nome" name="nome" type="text" placeholder="Digite o nome do produto">
+                                    <label for="nome">Buscar produto</label>
+                                </div>
+                                <br>                               
+                                <button class="btn waves-effect waves-light orange darken-3" type="submit" name="action">Buscar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="row" id="atualiza">
                     <%
-                        ProdutoDAO dao = new ProdutoDAO();
-                        List<ProdutoBean> produtos = dao.selecionaTodos();
-                        for (ProdutoBean produto : produtos) {%>
+                        if (session.getAttribute("produtosIndex") != null) {
+                            List<ProdutoBean> produtos = (List<ProdutoBean>) session.getAttribute("produtosIndex");
+                            for (ProdutoBean produto : produtos) {%>
                     <div class="col s3">
                         <div class="card z-depth-3">
                             <a href="Produto?acao=verProduto&id=<%= produto.getCodigo()%>" >
@@ -54,6 +71,9 @@
                         </div>
                     </div>
                     <%
+                            }
+                        } else {
+                            response.sendRedirect("Produto?acao=index");
                         }
                     %>
                 </div>

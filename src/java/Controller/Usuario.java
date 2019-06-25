@@ -71,7 +71,6 @@ public class Usuario extends HttpServlet {
             System.out.println(request.getParameter("id"));
             int id = Integer.parseInt(request.getParameter("id"));
             UsuarioBean usuario = new UsuarioBean();
-            System.out.println("AAAAA" + request.getParameter("senhaNova"));
             if (!request.getParameter("senhaNova").equals("")) {
                 if (dao.verificaSenha(request.getParameter("senha"), id)) {
                     usuario.setCodigo(id);
@@ -81,8 +80,10 @@ public class Usuario extends HttpServlet {
                     usuario.setCpf(request.getParameter("cpf"));
                     usuario.setEmail(request.getParameter("email"));
                     usuario.setSenha(request.getParameter("senhaNova"));
+                    usuario.setAdm(dao.verificaAdm(id));
                     dao.editar(usuario);
                     session.setAttribute("usuario", usuario);
+                    session.setAttribute("msg", "Usuario editado com sucesso");
                     rd = request.getRequestDispatcher("usuarioView.jsp");
                     rd.forward(request, response);
                 } else {
@@ -99,8 +100,10 @@ public class Usuario extends HttpServlet {
                     usuario.setTelefone(request.getParameter("telefone"));
                     usuario.setCpf(request.getParameter("cpf"));
                     usuario.setEmail(request.getParameter("email"));
+                    usuario.setAdm(dao.verificaAdm(id));
                     dao.editarSemSenha(usuario);
                     session.setAttribute("usuario", usuario);
+                    session.setAttribute("msg", "Usuario editado com sucesso");
                     rd = request.getRequestDispatcher("usuarioView.jsp");
                     rd.forward(request, response);
                 } else {

@@ -122,14 +122,15 @@ public class UsuarioDAO {
     
     public void editar(UsuarioBean usuario) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, cidade = ?, estado = ?, email = ?, senha = ? where codigo = ?");
+            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, email = ?, senha = ?, adm = ? where codigo = ?");
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getNascimento());
             pstm.setString(3, usuario.getTelefone());
             pstm.setString(4, usuario.getCpf());
-            pstm.setString(7, usuario.getEmail());
-            pstm.setString(8, usuario.getSenha());
-            pstm.setInt(9, usuario.getCodigo());
+            pstm.setString(5, usuario.getEmail());
+            pstm.setString(6, usuario.getSenha());
+            pstm.setBoolean(7, usuario.isAdm());
+            pstm.setInt(8, usuario.getCodigo());
             ResultSet rs = pstm.executeQuery();
             pstm.close();
             rs.close();
@@ -139,13 +140,14 @@ public class UsuarioDAO {
     
     public void editarSemSenha(UsuarioBean usuario) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, cidade = ?, estado = ?, email = ? where codigo = ?");
+            PreparedStatement pstm = conexao.prepareStatement("update usuarios set nome = ?, nascimento = ?, telefone = ?, cpf = ?, email = ?, adm = ? where codigo = ?");
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getNascimento());
             pstm.setString(3, usuario.getTelefone());
             pstm.setString(4, usuario.getCpf());
-            pstm.setString(7, usuario.getEmail());
-            pstm.setInt(8, usuario.getCodigo());
+            pstm.setString(5, usuario.getEmail());
+            pstm.setBoolean(6, usuario.isAdm());
+            pstm.setInt(7, usuario.getCodigo());
             ResultSet rs = pstm.executeQuery();
             pstm.close();
             rs.close();
@@ -182,5 +184,20 @@ public class UsuarioDAO {
             rs.close();
         } catch (SQLException e) {
         }
+    }
+    
+    public boolean verificaAdm(int id) {
+        try {
+            boolean retorno = false;
+            PreparedStatement pstm = conexao.prepareStatement("Select adm from usuarios where codigo = ?");
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()) {
+                retorno = rs.getBoolean("adm");
+            }
+            return retorno;
+        } catch (SQLException e) {
+        }
+        return false;
     }
 }

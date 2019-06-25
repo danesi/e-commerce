@@ -50,6 +50,13 @@ public class Produto extends HttpServlet {
 
         ProdutoDAO dao = new ProdutoDAO();
 
+        if (acao.equalsIgnoreCase("index")) {
+            List<ProdutoBean> produtos = dao.selecionaTodos();
+            session.setAttribute("produtosIndex", produtos);
+            rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        }
+
         if (acao.equalsIgnoreCase("addCarrinho")) {
             if (session.getAttribute("usuario") == null) {
                 rd = request.getRequestDispatcher("login.jsp");
@@ -211,10 +218,8 @@ public class Produto extends HttpServlet {
         if (acao.equalsIgnoreCase("buscarProduto")) {
             String nome = request.getParameter("nome");
             if (!nome.equals("")) {
-                ProdutoBean produto = dao.selecionaPorNome(nome);
-                if (produto.getNome() != null) {
-                    List<ProdutoBean> produtos = new ArrayList<>();
-                    produtos.add(produto);
+                List<ProdutoBean> produtos = dao.selecionaPorNome(nome);
+                if (produtos.size() > 0) {
                     session.setAttribute("produtos", produtos);
                     rd = request.getRequestDispatcher("produtoView.jsp");
                     rd.forward(request, response);
@@ -229,6 +234,26 @@ public class Produto extends HttpServlet {
                 rd.forward(request, response);
             }
 
+        }
+
+        if (acao.equalsIgnoreCase("filtro")) {
+            String nome = request.getParameter("nome");
+            if (!nome.equals("")) {
+                List<ProdutoBean> produtos = dao.selecionaPorNome(nome);
+                if (produtos.size() > 0) {
+                    session.setAttribute("produtosIndex", produtos);
+                    rd = request.getRequestDispatcher("index.jsp");
+                    rd.forward(request, response);
+                } else {
+                    session.setAttribute("msg", "Nenhum produto encontrado com esse nome");
+                    rd = request.getRequestDispatcher("Produto?acao=index");
+                    rd.forward(request, response);
+                }
+
+            } else {
+                rd = request.getRequestDispatcher("Produto?acao=index");
+                rd.forward(request, response);
+            }
         }
 
     }

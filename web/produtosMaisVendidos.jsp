@@ -49,7 +49,7 @@
                                             <td><img src="Imagens/<%= relatorio.getProduto().getImagem()%>" style="max-height: 50px" /></td>
                                             <td><%= relatorio.getProduto().getNome()%></td>
                                             <td><%= relatorio.getProduto().getQuant()%></td>
-                                            <td><%= relatorio.getProduto().getQuant() * relatorio.getProduto().getPreco()%> R$</td>
+                                            <td><%= String.format("R$ %,.2f", relatorio.getProduto().getQuant() * relatorio.getProduto().getPreco()).replace(",", ".")%> R$</td>
                                         </tr>
                                         <%
                                             }

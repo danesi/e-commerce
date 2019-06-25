@@ -152,13 +152,13 @@ public class ProdutoDAO {
         }
     }
     
-    public ProdutoBean selecionaPorNome(String nome) {
+    public List<ProdutoBean> selecionaPorNome(String nome) {
         try {
-            PreparedStatement pstm = conexao.prepareStatement("select * from produtos where nome = ?");
-            pstm.setString(1, nome);
+            PreparedStatement pstm = conexao.prepareStatement("select * from produtos where nome like '%"+nome+"%'");
             ResultSet rs = pstm.executeQuery();
-            ProdutoBean produto = new ProdutoBean();
+            List<ProdutoBean> produtos = new ArrayList<>();
             while (rs.next()) {
+                ProdutoBean produto = new ProdutoBean();
                 produto.setCodigo(rs.getInt("codigo"));
                 produto.setNome(rs.getString("nome"));
                 produto.setImagem(rs.getString("imagem"));
@@ -166,10 +166,11 @@ public class ProdutoDAO {
                 produto.setQuant_estoque(rs.getInt("quant_estoque"));
                 produto.setPromocao(rs.getBoolean("promocao"));
                 produto.setPrecoPro(rs.getDouble("precoPro"));
+                produtos.add(produto);
             }
             pstm.close();
             rs.close();
-            return produto;
+            return produtos;
         } catch (SQLException e) {
         }
         return null;
