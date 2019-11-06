@@ -30,7 +30,7 @@
                                         <li>
                                             <div class="collapsible-header"><i class="material-icons orange-text">shopping_basket</i><b>Produtos</b></div>
                                             <div class="collapsible-body">
-                                                <div class="row">
+                                                <div class="row center">
                                                     <div class="col offset-l2">
                                                         <a href="produtoAdd.jsp" class="waves-effect waves-light btn orange darken-3"><i class="material-icons left">add</i>Cadastrar produto</a>
                                                     </div>

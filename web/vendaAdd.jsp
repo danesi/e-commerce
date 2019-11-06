@@ -61,9 +61,14 @@
                                         <label for="cidade">Cidade</label>
                                     </div>
                                 </div>
-                                <div class="row center">
-                                    <a href="Endereco?acao=editarDaVenda" class="waves-effect waves-light btn grey darken-3">Editar</a>
-                                    <a href="Venda?acao=cadastrar" class="waves-effect waves-light btn orange darken-3">Confirmar esse</a>
+                                <div class="row">
+                                    <div class=" center">
+                                        <a href="Endereco?acao=editarDaVenda" class="waves-effect waves-light btn grey darken-3">Editar</a>
+                                        <a href="Venda?acao=cadastrar" class="waves-effect waves-light btn orange darken-3">Confirmar esse</a>
+                                    </div>
+                                    <div class="right">
+                                        <img src="Imagens/WhatsApp Image 2019-11-06 at 14.55.28.jpeg">
+                                    </div>
                                 </div>
                                 <%
                                 } else {
@@ -139,9 +144,9 @@
     for (var i = 0; i < tabs.length; i++) {
         M.Tabs.init(tabs[i]);
     }
-    
+
     $(document).ready(function () {
         $('#cep').mask('00000-000');
     });
-    
+
 </script>

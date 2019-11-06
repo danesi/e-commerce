@@ -83,11 +83,20 @@
 
                             </div>
                             <br>
-                            <div class="row center">
-                                <h5 class="black-text">Preço total a pagar: <%= String.format("R$ %,.2f", precoFinal).replace(",", ".")%> R$</h5>
-                                <br>
-                                <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Continuar comprando</a>
-                                <a href="Venda?acao=concluir" class="waves-effect waves-light btn orange darken-3">Concluir compra</a>
+                            <div class="row">
+                                <div class=" center">
+                                    <h5 class="black-text">Preço total a pagar: <%= String.format("R$ %,.2f", precoFinal).replace(",", ".")%> R$</h5>
+                                    <br>
+                                    <a href="index.jsp" class="waves-effect waves-light btn grey darken-3">Continuar comprando</a>
+                                    <a href="Venda?acao=concluir" class="waves-effect waves-light btn orange darken-3">Concluir compra</a>
+
+                                </div>
+                                    <div class="left">
+                                        <img src="Imagens/WhatsApp Image 2019-11-06 at 14.57.00.jpeg">
+                                </div>
+                                <div class="right">
+                                    <img src="Imagens/WhatsApp Image 2019-11-06 at 14.54.18.jpeg">
+                                </div>
                             </div>
                         </div>
                     </div>

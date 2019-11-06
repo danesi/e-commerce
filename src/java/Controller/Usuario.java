@@ -68,7 +68,6 @@ public class Usuario extends HttpServlet {
         }
 
         if (acao.equalsIgnoreCase("editar")) {
-            System.out.println(request.getParameter("id"));
             int id = Integer.parseInt(request.getParameter("id"));
             UsuarioBean usuario = new UsuarioBean();
             if (!request.getParameter("senhaNova").equals("")) {

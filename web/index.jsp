@@ -75,6 +75,7 @@
                         } else {
                             response.sendRedirect("Produto?acao=index");
                         }
+                        session.setAttribute("produtosIndex", null);
                     %>
                 </div>
             </div>

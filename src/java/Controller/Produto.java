@@ -128,8 +128,8 @@ public class Produto extends HttpServlet {
                 if (item.isFormField()) {
                     produto = processFormField(item, produto);
                     if (produto.getNome() == null) {
-                        request.setAttribute("error", "Ocorreu um erro durante o processamento dos valores. Tente novamente.");
-                        rd = request.getRequestDispatcher("/products?action=index");
+                        request.setAttribute("msg", "Ocorreu um erro durante o processamento dos valores. Tente novamente.");
+                        rd = request.getRequestDispatcher("Produto?acao=index");
                         rd.forward(request, response);
                     }
 
@@ -137,8 +137,8 @@ public class Produto extends HttpServlet {
                     produto = processUploadedFile(item, produto);
 
                     if (produto.getImagem() == null) {
-                        request.setAttribute("error", "Falha ao salvar imagem. Tente novamente.");
-                        rd = request.getRequestDispatcher("/products?action=index");
+                        request.setAttribute("msg", "Falha ao salvar imagem. Tente novamente.");
+                        rd = request.getRequestDispatcher("Produtos?acao=index");
                         rd.forward(request, response);
                     }
                 }
@@ -175,7 +175,7 @@ public class Produto extends HttpServlet {
                     produto = processFormField(item, produto);
                     if (produto.getNome() == null) {
                         request.setAttribute("msg", "Ocorreu um erro durante o processamento dos valores. Tente novamente.");
-                        rd = request.getRequestDispatcher("index.jsp");
+                        rd = request.getRequestDispatcher("Produto?acao=index");
                         rd.forward(request, response);
                     }
                 } else {

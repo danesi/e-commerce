@@ -9093,3 +9093,58 @@ input[type=range]::-ms-thumb {
         margin-top: 1.2rem;
     }
 }
+
+.botaocontato{
+    position: fixed;
+    margin-right: 5px;
+    margin-bottom: 30px;
+    bottom: 0;
+    right: 0;
+    width: 145px;
+    border-radius: 15px;
+}
+
+.caixacontato{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    min-height: 80vh;
+    max-height: 80vh;
+    width: 25vw;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    min-width: 300px;
+    overflow: scroll;
+    border: thin solid #1D345C;
+}
+
+.topocontato{
+    background-color: black;
+    width: 100%;
+    top: 0;
+    margin-top: 0px;
+    border-radius: 15px 15px 0px 0px;
+}
+.spancontato{
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
