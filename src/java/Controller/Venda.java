@@ -84,6 +84,7 @@ public class Venda extends HttpServlet {
             int id = dao.selecionaUltima();
             VendaBean vendaB = dao.selecionaPorId(id);
             session.setAttribute("vendaCadastrada", vendaB);
+            session.setAttribute("msg", "Compra efetuada com sucesso");
             rd = request.getRequestDispatcher("ItemVenda?acao=cadastrar");
             rd.forward(request, response);
         }
